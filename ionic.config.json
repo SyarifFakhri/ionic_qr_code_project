@@ -1,0 +1,7 @@
+{
+  "name": "sourcebytes",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

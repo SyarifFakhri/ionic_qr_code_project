@@ -1,0 +1,38 @@
+app-login {
+    
+}
+
+$white-color: #fff;
+$height100: 100%;
+
+ion-grid {
+    width:100%;
+    height: $height100;
+    background: #dfdfdf;
+}
+
+ion-row {
+    height: $height100;
+}
+
+ion-col {
+    border: 1px solid #488aff;
+    background: $white-color;
+}
+
+ion-button {
+    font-weight: 300;
+}
+
+@media (min-width: 240px) and (max-width: 768px) {
+    ion-grid {
+        background: $white-color;
+        background-image: url(https://www.iwantwallpaper.co.uk/images/muriva-book-shelf-case-pattern-library-vintage-motif-white-wallpaper-e82209-p2868-5959_image.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        
+    }
+    ion-col {
+        border: none;
+    }
+}
