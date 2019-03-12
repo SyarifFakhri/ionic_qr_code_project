@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-export interface ClassList {
+export interface ClassListInterface {
   id?: string;
   classCode: string;
   className: string;
@@ -15,12 +15,12 @@ export interface ClassList {
 })
 
 export class ClassInfoService {
-  private classCollection: AngularFirestoreCollection<ClassList>;
+  private classCollection: AngularFirestoreCollection<ClassListInterface>;
  
-  private classList: Observable<ClassList[]>;
+  private classList: Observable<ClassListInterface[]>;
  
   constructor(db: AngularFirestore) {
-    this.classCollection = db.collection<ClassList>('classList');
+    this.classCollection = db.collection<ClassListInterface>('classList');
  
     this.classList = this.classCollection.snapshotChanges().pipe(
       map(actions => {
@@ -38,14 +38,14 @@ export class ClassInfoService {
   }
  
   getTodo(id) {
-    return this.classCollection.doc<ClassList>(id).valueChanges();
+    return this.classCollection.doc<ClassListInterface>(id).valueChanges();
   }
  
-  updateTodo(todo: ClassList, id: string) {
+  updateTodo(todo: ClassListInterface, id: string) {
     return this.classCollection.doc(id).update(todo);
   }
  
-  addTodo(todo: ClassList) {
+  addTodo(todo: ClassListInterface) {
     return this.classCollection.add(todo);
   }
  

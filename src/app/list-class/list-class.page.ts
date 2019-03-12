@@ -1,4 +1,4 @@
-import { ClassList, ClassInfoService } from './../services/class-info.service';
+import { ClassListInterface, ClassInfoService } from './../services/class-info.service';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-class.page.scss'],
 })
 export class ListClassPage implements OnInit {
-  classes: ClassList[];
+  classes: ClassListInterface[];
   constructor(private classInfoService: ClassInfoService) { }
 
   ngOnInit() {
