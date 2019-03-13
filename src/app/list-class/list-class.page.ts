@@ -1,6 +1,5 @@
-import { ClassListInterface, ClassInfoService } from './../services/class-info.service';
 import { Component, OnInit } from '@angular/core';
-
+import { ClassListInterface, ClassInfoService } from './../services/class-info.service';
 
 @Component({
   selector: 'app-list-class',

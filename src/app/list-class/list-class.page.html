@@ -22,7 +22,7 @@
     <ion-item lines="inset" button [routerLink]="['/add-class', item.id]">
       <ion-label>
         {{ item.classCode }}
-        <p>{{ item.className | date:'short' }}</p>
+        <p>{{ item.className}}</p>
       </ion-label>
       <ion-note slot="end" color="primary">{{ item.createdBy }}</ion-note>
     </ion-item>

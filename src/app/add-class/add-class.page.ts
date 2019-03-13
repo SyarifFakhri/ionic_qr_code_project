@@ -12,7 +12,7 @@ import { NavController, LoadingController } from '@ionic/angular';
 
 export class AddClassPage implements OnInit {
 
-  classInfo: ClassListInterface = {
+  classInfo: ClassListInterface = { 
     classCode: 'test class code',
     className: 'test class name',
     createdBy: 'john doe'
