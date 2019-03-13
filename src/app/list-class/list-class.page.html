@@ -19,7 +19,7 @@
   </ng-container>
 
   <ion-item-sliding *ngFor="let item of classes">
-    <ion-item lines="inset" button [routerLink]="['/details', item.id]">
+    <ion-item lines="inset" button [routerLink]="['/add-class', item.id]">
       <ion-label>
         {{ item.classCode }}
         <p>{{ item.className | date:'short' }}</p>
@@ -38,7 +38,7 @@
 </ion-list>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/add-class" routerDirection="forward">
+    <ion-fab-button [routerLink]="['/add-class']" routerDirection="forward">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'code', loadChildren: './code/code.module#CodePageModule' },
   { path: 'menu-class', loadChildren: './menu-class/menu-class.module#MenuClassPageModule' },
   { path: 'attendance', loadChildren: './attendance/attendance.module#AttendancePageModule' },
+  { path: '', loadChildren: './add-class/add-class.module#AddClassPageModule' },
  // { path: 'attendance', loadChildren: './attendance/attendance.module#AttendancePageModule' },
  // { path: 'alert', loadChildren: './alert/alert.module#AlertPageModule' },
 ];
