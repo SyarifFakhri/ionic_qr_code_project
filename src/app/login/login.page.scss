@@ -1,38 +1,80 @@
-app-login {
+// form {
+//     margin-bottom: 32px;
+//     button {
+//       margin-top: 20px !important;
+//     }
+//   }
+// app-login {
     
-}
+// }
 
-$white-color: #fff;
-$height100: 100%;
+// $white-color: #fff;
+// $height100: 100%;
 
-ion-grid {
-    width:100%;
-    height: $height100;
-    background: #dfdfdf;
-}
+// ion-grid {
+//     width:100%;
+//     height: $height100;
+//     background: #dfdfdf;
+// }
 
-ion-row {
-    height: $height100;
-}
+// ion-row {
+//     height: $height100;
+// }
 
-ion-col {
-    border: 1px solid #488aff;
-    background: $white-color;
-}
+// ion-col {
+//     border: 1px solid #488aff;
+//     background: $white-color;
+// }
 
-ion-button {
-    font-weight: 300;
-}
+// ion-button {
+//     font-weight: 300;
+// }
 
-@media (min-width: 240px) and (max-width: 768px) {
-    ion-grid {
-        background: $white-color;
-        background-image: url(https://www.iwantwallpaper.co.uk/images/muriva-book-shelf-case-pattern-library-vintage-motif-white-wallpaper-e82209-p2868-5959_image.jpg);
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
+// @media (min-width: 240px) and (max-width: 768px) {
+//     ion-grid {
+//         background: $white-color;
+//         background-image: url(https://www.iwantwallpaper.co.uk/images/muriva-book-shelf-case-pattern-library-vintage-motif-white-wallpaper-e82209-p2868-5959_image.jpg);
+//         background-repeat: no-repeat;
+//         background-size: 100% 100%;
         
+//     }
+//     ion-col {
+//         border: none;
+//     }
+// }
+
+form {
+    margin-bottom: 32px;
+    button {
+      margin-top: 20px !important;
     }
-    ion-col {
-        border: none;
+  }
+  
+  p {
+    font-size: 0.8em;
+    color: #d2d2d2;
+  }
+  
+  ion-label {
+    margin-left: 5px;
+  }
+  
+  ion-input {
+    padding: 5px;
+  }
+  
+  .invalid {
+    border-bottom: 1px solid #ff6153;
+  }
+  
+  .error-message {
+    min-height: 2.2rem;
+    ion-label {
+      margin: 2px 0;
+      font-size: 60%;
+      color: #ff6153;
     }
-}
+    .item-inner {
+      border-bottom: 0 !important;
+    }
+  }
