@@ -8,16 +8,17 @@ import { ClassListInterface, ClassInfoService } from './../services/class-info.s
 })
 export class ListClassPage implements OnInit {
   classes: ClassListInterface[];
+  
   constructor(private classInfoService: ClassInfoService) { }
 
   ngOnInit() {
-    this.classInfoService.getTodos().subscribe(res => {
+    this.classInfoService.getDetails().subscribe(res => {
       this.classes = res;
     });
   }
 
   remove(item) {
-    this.classInfoService.removeTodo(item.id);
+    this.classInfoService.removeDetail(item.id);
   }
 
 }

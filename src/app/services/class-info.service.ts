@@ -37,25 +37,25 @@ export class ClassInfoService {
     );
   }
  
-  getTodos() {
+  getDetails() {
     return this.classList;
   }
  
-  getTodo(id) {
+  getDetail(id) {
     //return this.classCollection.doc<ClassListInterface>(id).valueChanges();
     return this.classCollection.doc(this.userID).collection<any>("class").doc<ClassListInterface>(id).valueChanges();
   }
  
-  updateTodo(todo: ClassListInterface) {
-    return this.classCollection.doc(this.userID).collection<any>("class").doc(todo.id).update(todo);
+  updateDetail(classDetails: ClassListInterface) {
+    return this.classCollection.doc(this.userID).collection<any>("class").doc(classDetails.id).update(classDetails);
   }
  
-  addTodo(todo: ClassListInterface) {
+  addDetail(classDetails: ClassListInterface) {
     this.classCollection.doc(this.userID).set({"username":this.userID});
-    return this.classCollection.doc(this.userID).collection<any>("class").doc(todo.id).set(todo);
+    return this.classCollection.doc(this.userID).collection<any>("class").doc(classDetails.id).set(classDetails);
   }
  
-  removeTodo(id) {
+  removeDetail(id) {
     return this.classCollection.doc(id).delete();
   }
 }

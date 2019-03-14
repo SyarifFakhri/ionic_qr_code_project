@@ -36,7 +36,7 @@ export class AddClassPage implements OnInit {
       message: 'Loading class info..'
     });
     await loading.present();
-    this.classService.getTodo(this.classId).subscribe(res => {
+    this.classService.getDetail(this.classId).subscribe(res => {
       loading.dismiss();
       this.classInfo = res;
     });
@@ -50,13 +50,13 @@ export class AddClassPage implements OnInit {
     await loading.present();
  
     if (this.classId) {
-      this.classService.updateTodo(this.classInfo).then(() => {
+      this.classService.updateDetail(this.classInfo).then(() => {
         loading.dismiss();
         this.nav.navigateBack('list-class');
       });
 
     } else {
-      this.classService.addTodo(this.classInfo).then(() => {
+      this.classService.addDetail(this.classInfo).then(() => {
         loading.dismiss();
         this.nav.navigateBack('list-class');
       });
