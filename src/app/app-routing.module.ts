@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
   { path: 'qrcode', loadChildren: './qrcode/qrcode.module#QrcodePageModule' },
   { path: 'submit', loadChildren: './submit/submit.module#SubmitPageModule' },
-  { path: 'setup', loadChildren: './setup/setup.module#SetupPageModule' },
+  //{ path: 'setup', loadChildren: './setup/setup.module#SetupPageModule' },
   { path: 'list-class', loadChildren: './list-class/list-class.module#ListClassPageModule' },
   { path: 'code', loadChildren: './code/code.module#CodePageModule' },
   { path: 'menu-class', loadChildren: './menu-class/menu-class.module#MenuClassPageModule' },

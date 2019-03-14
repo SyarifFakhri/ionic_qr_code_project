@@ -34,7 +34,6 @@ export class AddClassPage implements OnInit {
       message: 'Loading class info..'
     });
     await loading.present();
- 
     this.classService.getTodo(this.classId).subscribe(res => {
       loading.dismiss();
       this.classInfo = res;
