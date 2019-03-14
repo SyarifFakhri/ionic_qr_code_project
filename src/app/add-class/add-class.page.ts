@@ -13,11 +13,13 @@ import { NavController, LoadingController } from '@ionic/angular';
 export class AddClassPage implements OnInit {
 
   classInfo: ClassListInterface = { 
-    classCode: 'test class code',
-    className: 'test class name',
-    createdBy: 'john doe'
+    id: 'test class code',
+    day: {
+      'student1': '151',
+      'student2': '161'
+    }
   };
- 
+  
   classId = null;
  
   constructor(private route: ActivatedRoute, private nav: NavController, private classService: ClassInfoService, private loadingController: LoadingController) { }

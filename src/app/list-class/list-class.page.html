@@ -21,10 +21,10 @@
   <ion-item-sliding *ngFor="let item of classes">
     <ion-item lines="inset" button [routerLink]="['/add-class', item.id]">
       <ion-label>
-        {{ item.classCode }}
-        <p>{{ item.className}}</p>
+        {{ item.id }}
+        <!-- <p>{{ item.className}}</p> -->
       </ion-label>
-      <ion-note slot="end" color="primary">{{ item.createdBy }}</ion-note>
+      <!-- <ion-note slot="end" color="primary">{{ item.createdBy }}</ion-note> -->
     </ion-item>
 
     <ion-item-options side="end">

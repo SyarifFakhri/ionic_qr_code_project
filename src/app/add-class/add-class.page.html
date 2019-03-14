@@ -8,13 +8,13 @@
   </ion-header>
    
   <ion-content padding>
-    <ion-list lines="full">
+    <!-- <ion-list lines="full"> -->
       <ion-item>
-        <ion-input required type="text" placeholder="class code" [(ngModel)]="classInfo.classCode"></ion-input>
+        <ion-input required type="text" placeholder="class name" [(ngModel)]="classInfo.id"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-input required type="text" placeholder="class name" [(ngModel)]="classInfo.className"></ion-input>
-      </ion-item>
-    </ion-list>
+      <!-- <ion-item>
+        <ion-input required type="text" placeholder="class name" [(ngModel)]="classInfo.day"></ion-input>
+      </ion-item> -->
+    <!-- </ion-list> -->
     <ion-button expand="full" (click)="saveClassInfo()">Save</ion-button>
   </ion-content>
