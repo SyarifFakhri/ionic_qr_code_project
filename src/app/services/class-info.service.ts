@@ -46,8 +46,8 @@ export class ClassInfoService {
     return this.classCollection.doc(this.userID).collection<any>("class").doc<ClassListInterface>(id).valueChanges();
   }
  
-  updateTodo(todo: ClassListInterface, id: string) {
-    return this.classCollection.doc(id).update(todo);
+  updateTodo(todo: ClassListInterface) {
+    return this.classCollection.doc(this.userID).collection<any>("class").doc(todo.id).update(todo);
   }
  
   addTodo(todo: ClassListInterface) {

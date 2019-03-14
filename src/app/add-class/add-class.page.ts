@@ -50,7 +50,7 @@ export class AddClassPage implements OnInit {
     await loading.present();
  
     if (this.classId) {
-      this.classService.updateTodo(this.classInfo, this.classId).then(() => {
+      this.classService.updateTodo(this.classInfo).then(() => {
         loading.dismiss();
         this.nav.navigateBack('list-class');
       });
