@@ -12,7 +12,9 @@ const routes: Routes = [
   { path: 'menu-class', loadChildren: './menu-class/menu-class.module#MenuClassPageModule' },
   { path: 'attendance', loadChildren: './attendance/attendance.module#AttendancePageModule' },
   { path: 'add-class', loadChildren: './add-class/add-class.module#AddClassPageModule' },
-  { path: 'add-class/:id', loadChildren: './add-class/add-class.module#AddClassPageModule'}
+  { path: 'add-class/:id', loadChildren: './add-class/add-class.module#AddClassPageModule'},
+  { path: 'class-detail', loadChildren: './class-detail/class-detail.module#ClassDetailPageModule' },
+  { path: 'class-detail/:id', loadChildren: './class-detail/class-detail.module#ClassDetailPageModule'}
 ];
 
 @NgModule({

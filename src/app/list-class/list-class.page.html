@@ -19,7 +19,7 @@
   </ng-container>
 
   <ion-item-sliding *ngFor="let item of classes">
-    <ion-item lines="inset" button [routerLink]="['/add-class', item.id]">
+    <ion-item lines="inset" button [routerLink]="['/class-detail', item.id]">
       <ion-label>
         {{ item.id }}
         <!-- <p>{{ item.className}}</p> -->
