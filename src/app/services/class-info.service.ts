@@ -40,7 +40,7 @@ export class ClassInfoService {
   getDetails() {
     return this.classList;
   }
- 
+
   getDetail(id) {
     //return this.classCollection.doc<ClassListInterface>(id).valueChanges();
     return this.classCollection.doc(this.userID).collection<any>("class").doc<ClassListInterface>(id).valueChanges();

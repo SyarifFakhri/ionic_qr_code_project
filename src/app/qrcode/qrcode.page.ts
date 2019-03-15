@@ -1,5 +1,5 @@
 import { studentInterface, AddStudentService } from './../services/add-student.service';
-import { LoadingController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,10 +12,10 @@ export class QrcodePage implements OnInit {
 
   studentInfo:studentInterface = {
     studentId: "1513993",
-    lecturerId: "lecturer0",
-    classId: "math"
+    lecturerId: "lecturer1",
+    classId: "mathematics"
   }
-  constructor(private loadingController: LoadingController, private studentService: AddStudentService) { }
+  constructor(private nav: NavController, private loadingController: LoadingController, private studentService: AddStudentService) { }
 
   ngOnInit() {
   }
@@ -28,6 +28,7 @@ export class QrcodePage implements OnInit {
 
     this.studentService.addStudent(this.studentInfo).then(() => {
       loading.dismiss();
+      this.nav.navigateBack('dashboard');
     });
     
   }

@@ -13,7 +13,7 @@ import { NavController, LoadingController } from '@ionic/angular';
 export class AddClassPage implements OnInit {
 
   classInfo: ClassListInterface = { 
-    id: 'test class code',
+    id: 'mathematics',
     students: [],
     date: new Date().getTime()
   };
