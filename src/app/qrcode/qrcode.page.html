@@ -1,3 +1,11 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-button color="dark" [routerLink]="['/dashboard']">
+			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+		  </ion-button>
+	</ion-toolbar>
+  </ion-header>
+  
 <ion-grid>
 	<ion-row justify-content-center>
 		<ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -5,14 +13,26 @@
 				<h4>Enter Code</h4>
 			</div>
 			<div padding>
-				<ion-item>
+				<!-- <ion-item>
 					<ion-input position="center" type="text" placeholder="Code"></ion-input>
-				</ion-item>
+				</ion-item> -->
+
+				<ion-list lines="full">
+					<ion-item>
+						<ion-input required type="text" placeholder="class id" [(ngModel)]="studentInfo.studentId"></ion-input>
+						</ion-item>
+						<ion-item>
+						<ion-input required type="text" placeholder="student id" [(ngModel)]="studentInfo.classId"></ion-input>
+					</ion-item>
+					<ion-item>
+						<ion-input required type="text" placeholder="leturer id" [(ngModel)]="studentInfo.lecturerId"></ion-input>
+					</ion-item>
+				</ion-list>
 
 			</div>
 
 			<div padding>
-				<ion-button [routerLink]="['/dashboard']" color="dark" size="large" expand="block">Submit</ion-button>
+				<ion-button (click)="addStudent()" color="dark" size="large" expand="block">Submit</ion-button>
 			</div>
 		</ion-col>
 	</ion-row>

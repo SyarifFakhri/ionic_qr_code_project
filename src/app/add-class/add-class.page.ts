@@ -14,10 +14,8 @@ export class AddClassPage implements OnInit {
 
   classInfo: ClassListInterface = { 
     id: 'test class code',
-    day: {
-      'student1': '151',
-      'student2': '161'
-    }
+    students: [],
+    date: new Date().getTime()
   };
   
   classId = null;
@@ -43,7 +41,6 @@ export class AddClassPage implements OnInit {
   }
  
   async saveClassInfo() {
- 
     const loading = await this.loadingController.create({
       message: 'Saving class info..'
     });
@@ -54,7 +51,7 @@ export class AddClassPage implements OnInit {
         loading.dismiss();
         this.nav.navigateBack('list-class');
       });
-
+{}
     } else {
       this.classService.addDetail(this.classInfo).then(() => {
         loading.dismiss();

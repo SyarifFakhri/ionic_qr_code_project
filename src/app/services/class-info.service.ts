@@ -6,7 +6,8 @@ import { map } from 'rxjs/operators';
 
 export interface ClassListInterface {
   id?: string;
-  day: any;
+  students: any;
+  date: number;
 }
 
 @Injectable({
@@ -16,7 +17,7 @@ export interface ClassListInterface {
 export class ClassInfoService { 
 
   private classCollection: AngularFirestoreCollection<any>;
-  private userID: string = "lecture0";
+  private userID: string = "lecturer1";
 
   private classList: Observable<ClassListInterface[]>;
   
@@ -24,7 +25,6 @@ export class ClassInfoService {
 
     this.classCollection = db.collection<any>('users');
     
-
     //this.classList = this.classCollection.snapshotChanges().pipe(
     this.classList = this.classCollection.doc(this.userID).collection<any>("class").snapshotChanges().pipe(
       map(actions => {
