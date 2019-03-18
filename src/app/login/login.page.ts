@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/user/auth.service';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -30,7 +31,9 @@ export class LoginPage implements OnInit {
     async loginUser(loginForm: FormGroup): Promise<void> {
       if (!loginForm.valid) {
         console.log('Form is not valid yet, current value:', loginForm.value);
-      } else {
+      } 
+      
+      else {
         this.loading = await this.loadingCtrl.create();
         await this.loading.present();
     
@@ -40,7 +43,7 @@ export class LoginPage implements OnInit {
         this.authService.loginUser(email, password).then(
           () => {
             this.loading.dismiss().then(() => {
-              this.router.navigateByUrl('home');
+              this.router.navigateByUrl('dashboard');
             });
           },
           error => {
@@ -52,8 +55,12 @@ export class LoginPage implements OnInit {
               await alert.present();
             });
           }
+          
+          
         );
       }
+
+
     }
 
   ngOnInit() {
