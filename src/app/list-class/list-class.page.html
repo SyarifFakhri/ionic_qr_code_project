@@ -1,15 +1,46 @@
-<ion-grid>
-  <ion-row justify-content-center>
-    <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-      <div text-center>
-        <h4>List of Class</h4>
-      </div>
-      
-  
-      <div padding>
-        <ion-button color="dark" size="large" [routerLink]="['/menu-class']"expand="block">Mobile Application</ion-button>
-      </div>
-      
-    </ion-col>
-  </ion-row>
-  </ion-grid>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Class list
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+
+<ion-list>
+  <ng-container *ngIf="!classes || classes.length == 0">
+    <div *ngFor="let n of [0,1,2]" padding>
+      <ion-skeleton-text></ion-skeleton-text>
+      <p>
+        <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+      </p>
+    </div>
+  </ng-container>
+
+  <ion-item-sliding *ngFor="let item of classes">
+    <ion-item lines="inset" button [routerLink]="['/add-class', item.id]">
+      <ion-label>
+        {{ item.classCode }}
+        <p>{{ item.className}}</p>
+      </ion-label>
+      <ion-note slot="end" color="primary">{{ item.createdBy }}</ion-note>
+    </ion-item>
+
+    <ion-item-options side="end">
+      <ion-item-option (click)="remove(item)" color="secondary">
+        remove
+        <ion-icon name="checkmark" slot="end"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+
+</ion-list>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/add-class']" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
