@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: 'list-class', loadChildren: './list-class/list-class.module#ListClassPageModule' },
   { path: 'code', loadChildren: './code/code.module#CodePageModule' },
   { path: 'menu-class', loadChildren: './menu-class/menu-class.module#MenuClassPageModule' },
-  { path: 'attendance', loadChildren: './attendance/attendance.module#AttendancePageModule' },
   { path: 'add-class', loadChildren: './add-class/add-class.module#AddClassPageModule' },
   { path: 'add-class/:id', loadChildren: './add-class/add-class.module#AddClassPageModule'},
   { path: 'class-detail', loadChildren: './class-detail/class-detail.module#ClassDetailPageModule' },
