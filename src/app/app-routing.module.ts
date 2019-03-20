@@ -14,8 +14,6 @@ const routes: Routes = [
   { path: 'list-class', loadChildren: './list-class/list-class.module#ListClassPageModule' },
   { path: 'code', loadChildren: './code/code.module#CodePageModule' },
   { path: 'menu-class', loadChildren: './menu-class/menu-class.module#MenuClassPageModule' },
-  {path: 'event-create',loadChildren:'./pages/event-create/event-create.module#EventCreatePageModule',canActivate: [AuthGuard],},
-  { path: 'event-detail/:id',loadChildren:'./pages/event-detail/event-detail.module#EventDetailPageModule', canActivate: [AuthGuard],},
   { path: 'reset-password', loadChildren: './reset-password/reset-password.module#ResetPasswordPageModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
   { path: 'add-class', loadChildren: './add-class/add-class.module#AddClassPageModule' },
