@@ -13,11 +13,11 @@ import { NavController, LoadingController } from '@ionic/angular';
 export class AddClassPage implements OnInit {
 
   classInfo: ClassListInterface = { 
-    classCode: 'test class code',
-    className: 'test class name',
-    createdBy: 'john doe'
+    id: 'mathematics',
+    students: [],
+    date: new Date().getTime()
   };
- 
+  
   classId = null;
  
   constructor(private route: ActivatedRoute, private nav: NavController, private classService: ClassInfoService, private loadingController: LoadingController) { }
@@ -34,27 +34,26 @@ export class AddClassPage implements OnInit {
       message: 'Loading class info..'
     });
     await loading.present();
-    this.classService.getTodo(this.classId).subscribe(res => {
+    this.classService.getDetail(this.classId).subscribe(res => {
       loading.dismiss();
       this.classInfo = res;
     });
   }
  
   async saveClassInfo() {
- 
     const loading = await this.loadingController.create({
       message: 'Saving class info..'
     });
     await loading.present();
  
     if (this.classId) {
-      this.classService.updateTodo(this.classInfo, this.classId).then(() => {
+      this.classService.updateDetail(this.classInfo).then(() => {
         loading.dismiss();
         this.nav.navigateBack('list-class');
       });
-
+{}
     } else {
-      this.classService.addTodo(this.classInfo).then(() => {
+      this.classService.addDetail(this.classInfo).then(() => {
         loading.dismiss();
         this.nav.navigateBack('list-class');
       });

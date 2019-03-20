@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>
-      Class list
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+	<ion-toolbar>
+		<ion-button color="dark" [routerLink]="['/dashboard']">
+			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+		  </ion-button>
+	</ion-toolbar>
+  </ion-header>
  
 <ion-content>
 
@@ -19,16 +19,16 @@
   </ng-container>
 
   <ion-item-sliding *ngFor="let item of classes">
-    <ion-item lines="inset" button [routerLink]="['/add-class', item.id]">
+    <ion-item lines="inset" button [routerLink]="['/class-detail', item.id]">
       <ion-label>
-        {{ item.classCode }}
-        <p>{{ item.className}}</p>
+        {{ item.id }}
+        <!-- <p>{{ item.className}}</p> -->
       </ion-label>
-      <ion-note slot="end" color="primary">{{ item.createdBy }}</ion-note>
+      <!-- <ion-note slot="end" color="primary">{{ item.createdBy }}</ion-note> -->
     </ion-item>
 
     <ion-item-options side="end">
-      <ion-item-option (click)="remove(item)" color="secondary">
+      <ion-item-option (click)="remove(item)" color="light">
         remove
         <ion-icon name="checkmark" slot="end"></ion-icon>
       </ion-item-option>
@@ -38,7 +38,7 @@
 </ion-list>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/add-class']" routerDirection="forward">
+    <ion-fab-button [routerLink]="['/add-class']" routerDirection="forward" color="dark">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
