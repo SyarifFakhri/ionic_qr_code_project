@@ -30,6 +30,8 @@ export class AuthService {
   
   loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return firebase.auth().signInWithEmailAndPassword(email, password);
+
+    
   }
   signupUser(email: string, password: string): Promise<any> {
     return firebase
@@ -54,6 +56,8 @@ export class AuthService {
   logoutUser():Promise<void> {
     return firebase.auth().signOut();
   }
+  
+
   
 }
 

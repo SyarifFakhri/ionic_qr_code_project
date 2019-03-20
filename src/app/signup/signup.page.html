@@ -48,7 +48,7 @@
     <ion-button
       expand="block"
       (click)="signupUser(signupForm)"
-      [disabled]="!signupForm.valid"
+      [disabled]="!signupForm.valid" routerLink="/login"
     >
       Create an Account
     </ion-button>
