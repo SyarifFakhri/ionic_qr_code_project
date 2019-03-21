@@ -2,7 +2,8 @@ import { AngularFirestore,AngularFirestoreCollection } from 'angularfire2/firest
 import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ClassListInterface, ClassInfoService } from './../services/class-info.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';  
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-list-class',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 export class ListClassPage implements OnInit {
   classes: ClassListInterface[];
   classCollection: AngularFirestoreCollection<any>;
-  private userID: string = "lecturer1";
+  private userID: string = "default";
   private classList: Observable<ClassListInterface[]>;
 
   //if the database is called from the service, instead of initialized
@@ -20,9 +21,19 @@ export class ListClassPage implements OnInit {
   //stuck. Suspect that it is an issue with the db not initializing properly
   constructor(private classInfoService: ClassInfoService, 
               private loadingController:LoadingController,
-              private db: AngularFirestore) { 
-                this.classCollection = db.collection<any>('users');
-                this.classList = this.classCollection.doc(this.userID).collection<ClassListInterface>("class").valueChanges();
+              private db: AngularFirestore) {
+                
+                firebase.auth().onAuthStateChanged(user => {
+                  if (user) {
+                    console.log(user.uid);
+                    this.userID = user.uid;
+                    this.classCollection = db.collection<any>('users');
+                    this.classList = this.classCollection.doc(this.userID).collection<ClassListInterface>("class").valueChanges();
+                  } else {
+                    console.log("failed to get user");
+                    // No user is signed in.
+                  }
+                });
               }
 
   ngOnInit() {
