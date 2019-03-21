@@ -40,8 +40,15 @@ export class ListClassPage implements OnInit {
     });
   }
   
-  remove(item) {
-    this.classInfoService.removeDetail(item.id);
+  async remove(item) {
+    // this.classInfoService.removeDetail(item.id);
+    const loading = await this.loadingController.create({
+      message: 'deleting class...'
+    });
+    await loading.present();
+    this.classInfoService.removeDetail(item.id).then(res => {
+      loading.dismiss();
+    });
   }
 
 }
