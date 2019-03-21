@@ -2,6 +2,7 @@ import { ClassListInterface } from './class-info.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase';
 
 export interface ClassListInterface {
   id?: string;
@@ -16,13 +17,21 @@ export interface ClassListInterface {
 export class ClassInfoService { 
 
   private classCollection: AngularFirestoreCollection<any>;
-  private userID: string = "lecturer1";
-
-  public classList: Observable<ClassListInterface[]>;
+  private userID: string = "default";
+  private classList: Observable<ClassListInterface[]>;
   
   constructor(db: AngularFirestore) {
-    this.classCollection = db.collection<any>('users');
-    this.classList = this.classCollection.doc(this.userID).collection<ClassListInterface>("class").valueChanges();
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log(user.uid);
+        this.userID = user.uid;
+        this.classCollection = db.collection<any>('users');
+        this.classList = this.classCollection.doc(this.userID).collection<ClassListInterface>("class").valueChanges();    
+      } else {
+        console.log("failed to get user");
+        // No user is signed in.
+      }
+    });
 
   }
 
