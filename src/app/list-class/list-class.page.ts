@@ -15,6 +15,9 @@ export class ListClassPage implements OnInit {
   private userID: string = "lecturer1";
   private classList: Observable<ClassListInterface[]>;
 
+  //if the database is called from the service, instead of initialized
+  //within the constructor, on the second load of the database it will become 
+  //stuck. Suspect that it is an issue with the db not initializing properly
   constructor(private classInfoService: ClassInfoService, 
               private loadingController:LoadingController,
               private db: AngularFirestore) { 
