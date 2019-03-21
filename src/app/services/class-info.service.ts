@@ -2,7 +2,6 @@ import { ClassListInterface } from './class-info.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 export interface ClassListInterface {
   id?: string;
@@ -46,6 +45,6 @@ export class ClassInfoService {
  
   removeDetail(id) {
     console.log("remove detail")
-    return this.classCollection.doc(id).delete();
+    return this.classCollection.doc(this.userID).collection<any>("class").doc(id).delete();
   }
 }
