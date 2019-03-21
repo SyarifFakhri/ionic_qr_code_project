@@ -1,6 +1,8 @@
+import { AngularFirestore,AngularFirestoreCollection } from 'angularfire2/firestore';
 import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ClassListInterface, ClassInfoService } from './../services/class-info.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-class',
@@ -9,14 +11,22 @@ import { ClassListInterface, ClassInfoService } from './../services/class-info.s
 })
 export class ListClassPage implements OnInit {
   classes: ClassListInterface[];
-  
-  constructor(private classInfoService: ClassInfoService, private loadingController:LoadingController) { }
+  classCollection: AngularFirestoreCollection<any>;
+  private userID: string = "lecturer1";
+  private classList: Observable<ClassListInterface[]>;
+
+  //if the database is called from the service, instead of initialized
+  //within the constructor, on the second load of the database it will become 
+  //stuck. Suspect that it is an issue with the db not initializing properly
+  constructor(private classInfoService: ClassInfoService, 
+              private loadingController:LoadingController,
+              private db: AngularFirestore) { 
+                this.classCollection = db.collection<any>('users');
+                this.classList = this.classCollection.doc(this.userID).collection<ClassListInterface>("class").valueChanges();
+              }
 
   ngOnInit() {
     this.loadClassInfo();
-    // this.classInfoService.getDetails().subscribe(res => {
-    //   this.classes = res;
-    // });
   }
 
   async loadClassInfo() {
@@ -24,13 +34,12 @@ export class ListClassPage implements OnInit {
       message: 'Loading class info..'
     });
     await loading.present();
-    this.classInfoService.getDetails().subscribe(res => {
+    this.classList.subscribe(res => {
       loading.dismiss();
       this.classes = res;
     });
   }
-
-
+  
   remove(item) {
     this.classInfoService.removeDetail(item.id);
   }
