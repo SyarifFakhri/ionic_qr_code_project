@@ -15,7 +15,8 @@ export class AddClassPage implements OnInit {
   classInfo: ClassListInterface = { 
     id: 'mathematics',
     students: [],
-    date: new Date().getTime()
+    date: new Date().getTime(),
+
   };
   
   classId = null;
