@@ -18,6 +18,7 @@ export interface CodeInterface {
 @Injectable({
   providedIn: 'root'
 })
+
 export class CodeService {
 
   private classCollection: AngularFirestoreCollection<any>;
@@ -56,22 +57,23 @@ generateCode():Promise<string> {
 )
 }
 
-generatorCode() {
-  let text = '';
-  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+// generatorCode() {
+//   let text = '';
+//   let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  for(let i=0;i<7;i++)
-  {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-}
+//   for(let i=0;i<7;i++)
+//   {
+//     text += possible.charAt(Math.floor(Math.random() * possible.length));
+//   }
+//   return text;
+// }
 
 addCode(codeDetails: CodeInterface){
   let isNotGenerated:boolean = true;
-  let generatedCode:string = null;
+  // let generatedCode:string = null;
   this.generateCode().then(text => {
     console.log(text);
+    codeDetails.id=text;
     this.db.collection<any>("codes", ref => ref.where(
       'id', '==', text
     )).valueChanges().subscribe(
@@ -84,9 +86,9 @@ addCode(codeDetails: CodeInterface){
         }
         else if (data.length == 0){
           console.log(data);
+          console.log(text);
           console.log("created");
-          codeDetails.id = generatedCode;
-          this.classCollection.doc(generatedCode).set(codeDetails);
+          this.classCollection.doc(text).set(codeDetails);
         }
       }
     )
