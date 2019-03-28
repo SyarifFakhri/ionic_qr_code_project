@@ -69,18 +69,18 @@ export class ClassDetailPage implements OnInit {
 
   
   async codeGenerator() {
-    // const loading = await this.loadingController.create({
-    //   message: 'Loading class info..'
-    // });
-    // await loading.present();
-    // this.classService.getDetail(this.classId).subscribe(res => {
-    //   loading.dismiss();
-    //   this.classInfo = res;
-    // });
+    const loading = await this.loadingController.create({
+      message: 'Loading class info..'
+    });
+    await loading.present();
     this.codeDetail.lecturer=this.userID;
     this.codeDetail.subject=this.classId;
+    this.codeserv.addCode(this.codeDetail).then(res => {
+      loading.dismiss();
+      // this.classInfo = res;
+    });
     
-    this.codeserv.addCode(this.codeDetail)
+    // this.codeserv.addCode(this.codeDetail)
 
 
   }

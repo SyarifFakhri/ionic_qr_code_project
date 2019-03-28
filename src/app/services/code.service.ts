@@ -26,7 +26,7 @@ export class CodeService {
       if (user) {
         console.log(user.uid);
         this.userID = user.uid;
-        this.classCollection = db.collection<any>('codes');    
+        this.classCollection = db.collection<CodeInterface>('codes');    
       } else {
         console.log("failed to get user");
         // No user is signed in.
@@ -45,7 +45,7 @@ generateCode() {
 
   for(let i=0;i<length;i++)
   {
-    text += possible.charAt(Math.floor(Math.random()* possible.length));
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
 
   return text;
@@ -53,20 +53,24 @@ generateCode() {
 
 addCode(codeDetails: CodeInterface){
   let isNotGenerated:boolean = true;
-  while (isNotGenerated) {
-  let text=this.generateCode();
-  this.db.collection<CodeInterface>("codes", ref => ref.where('id', '==', "1234567")).valueChanges().subscribe(
+  let generatedCode:string = null;
+  async value => {
+    while (isNotGenerated) {
+  // this.generateCode().;
+  await this.db.collection<CodeInterface>("codes", ref => ref.where('id', '==', generatedCode)).valueChanges().subscribe(
     data => {
       if (data) {
-        //NOTHING
+        console.log("code " + generatedCode + "is taken. Regenerating..."); 
       }
       else if (!data) {
-          this.classCollection
+          console.log("Code generated succesfully: " + generatedCode);
           isNotGenerated = false;
       }
     }
   );
   }
+}
+  return this.classCollection.doc(generatedCode).set(codeDetails);
 
 }
 
