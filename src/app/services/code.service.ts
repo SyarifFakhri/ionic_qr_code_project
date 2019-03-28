@@ -54,7 +54,7 @@ generateCode() {
 addCode(codeDetails: CodeInterface){
   let isNotGenerated:boolean = true;
   let generatedCode:string = null;
-  async value => {
+  async value => { //added comment
     while (isNotGenerated) {
   // this.generateCode().;
   await this.db.collection<CodeInterface>("codes", ref => ref.where('id', '==', generatedCode)).valueChanges().subscribe(
