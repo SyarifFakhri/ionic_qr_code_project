@@ -12,7 +12,6 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
   { path: 'qrcode', loadChildren: './qrcode/qrcode.module#QrcodePageModule' },
   { path: 'list-class', loadChildren: './list-class/list-class.module#ListClassPageModule' },
-  { path: 'code', loadChildren: './code/code.module#CodePageModule' },
   { path: 'menu-class', loadChildren: './menu-class/menu-class.module#MenuClassPageModule' },
   { path: 'reset-password', loadChildren: './reset-password/reset-password.module#ResetPasswordPageModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },

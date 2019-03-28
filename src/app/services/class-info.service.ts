@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 export interface ClassListInterface {
   id?: string;
   students: any;
-  date: number;
+  date: number
 }
 
 @Injectable({
@@ -26,11 +26,14 @@ export class ClassInfoService {
         console.log(user.uid);
         this.userID = user.uid;
         this.classCollection = db.collection<any>('users');
-        this.classList = this.classCollection.doc(this.userID).collection<ClassListInterface>("class").valueChanges();    
+        this.classList = db.collection<any>('users').doc(this.userID).collection<ClassListInterface>("class").valueChanges();    
       } else {
         console.log("failed to get user");
         // No user is signed in.
       }
+     
+
+
     });
 
   }
