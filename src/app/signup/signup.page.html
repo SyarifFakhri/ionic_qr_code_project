@@ -27,6 +27,27 @@
       <ion-label>Please enter a valid email.</ion-label>
     </ion-item>
 
+
+    
+    <ion-item>
+      <ion-label position="stacked">FullName</ion-label>
+      <ion-input
+        formControlName="fullName"
+        type="name"
+        placeholder="Your full name"
+        [class.invalid]="!signupForm.controls['fullName'].valid && signupForm.controls['fullName'].touched"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item
+      class="error-message"
+      *ngIf="!signupForm.controls['fullName'].valid  &&
+      signupForm.controls['fullName'].touched"
+    >
+      <ion-label>Your full name.</ion-label>
+    </ion-item>
+
+
     <ion-item>
       <ion-label position="stacked">Password</ion-label>
       <ion-input
@@ -45,12 +66,40 @@
       <ion-label>Your password needs more than 6 characters.</ion-label>
     </ion-item>
 
-    <ion-button
-      expand="block"
-      (click)="signupUser(signupForm)"
-      [disabled]="!signupForm.valid" routerLink="/login"
+   
+
+
+    <ion-item>
+      <ion-label position="stacked">MatricNo/StaffNo</ion-label>
+      <ion-input
+        formControlName="matricNo"
+        type="matricNo"
+        placeholder="Your matric number"
+        [class.invalid]="!signupForm.controls['matricNo'].valid && signupForm.controls['matricNo'].touched"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item
+      class="error-message"
+      *ngIf="!signupForm.controls['matricNo'].valid  &&
+      signupForm.controls['matricNo'].touched"
     >
-      Create an Account
-    </ion-button>
+      <ion-label>Your matric number needs more than 6 numbers.</ion-label>
+    </ion-item>
+
+
+
+    <ion-button
+    expand="block"
+    (click)="signupUser(signupForm)"
+    [disabled]="!signupForm.valid" routerLink="/login"
+  >
+    Create an Account
+  </ion-button>
+
+
+
+
+
   </form>
 </ion-content>
