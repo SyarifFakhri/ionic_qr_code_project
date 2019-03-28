@@ -75,10 +75,11 @@ export class ClassDetailPage implements OnInit {
     await loading.present();
     this.codeDetail.lecturer=this.userID;
     this.codeDetail.subject=this.classId;
-    this.codeserv.addCode(this.codeDetail).then(res => {
-      loading.dismiss();
+    //this.codeserv.addCode(this.codeDetail).then(res => {
+      //loading.dismiss();
       // this.classInfo = res;
-    });
+    //});
+    loading.dismiss();
     
     // this.codeserv.addCode(this.codeDetail)
 
