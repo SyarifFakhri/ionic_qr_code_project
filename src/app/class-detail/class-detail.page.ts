@@ -79,6 +79,7 @@ export class ClassDetailPage implements OnInit {
       //loading.dismiss();
       // this.classInfo = res;
     //});
+    this.codeserv.addCode(this.codeDetail);
     loading.dismiss();
     
     // this.codeserv.addCode(this.codeDetail)

@@ -8,7 +8,7 @@ import { resolve } from 'path';
 
 
 export interface CodeInterface {
-  id?: string;
+  id: string;
   lecturer: string;
   date: number;
   subject: string;
@@ -42,28 +42,59 @@ export class CodeService {
 
 
 
-generateCode():Promise<any> {
+generateCode():Promise<string> {
   return new Promise(resolve =>{
-    return resolve("done");
-//   let text = '';
-//   let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let text = '';
+  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-//   for(let i=0;i<length;i++)
-//   {
-//     text += possible.charAt(Math.floor(Math.random() * possible.length));
-//   }
-// }).then(() => {return Promise.resolve("test");});
+  for(let i=0;i<7;i++)
+  {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
-  );
+  return resolve(text);
+} 
+)
+}
+
+generatorCode() {
+  let text = '';
+  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for(let i=0;i<7;i++)
+  {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
 }
 
 addCode(codeDetails: CodeInterface){
   let isNotGenerated:boolean = true;
   let generatedCode:string = null;
-  async value => { //added comment
-    while (isNotGenerated) {
-      await this.generateCode().then(text => {
-        console.log(text);
+  this.generateCode().then(text => {
+    console.log(text);
+    this.db.collection<any>("codes", ref => ref.where(
+      'id', '==', text
+    )).valueChanges().subscribe(
+      data => { 
+        if (data.length > 0) {
+          //return nothing
+          console.log(data);
+          console.log("not created")
+        }
+        else if (data.length == 0){
+          console.log(data);
+          console.log("created");
+          codeDetails.id = generatedCode;
+          this.classCollection.doc(generatedCode).set(codeDetails);
+        }
+      }
+    )
+
+  })
+
+
+      // this.generateCode().then(text => {
+      //   console.log(text);
   //     this.db.collection<CodeInterface>("codes", ref => ref.where('id', '==', generatedCode)).valueChanges().subscribe(
   // data => {
   //   if (data) {
@@ -73,14 +104,14 @@ addCode(codeDetails: CodeInterface){
   //       console.log("Code generated succesfully: " + generatedCode);
   //       isNotGenerated = false;
   //   }
-    });
-  }
+    // });
+  // }
 }
 }
 
 
 
-}
+
 
 
 
