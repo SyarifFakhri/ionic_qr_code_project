@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { __generator } from 'tslib';
 import * as firebase from 'firebase';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-class-detail',
@@ -70,24 +71,31 @@ export class ClassDetailPage implements OnInit {
   
   async codeGenerator() {
     const loading = await this.loadingController.create({
-      message: 'Loading class info..'
+      message: 'Generating code..'
     });
+
     await loading.present();
     this.codeDetail.lecturer=this.userID;
     this.codeDetail.subject=this.classId;
-    //this.codeserv.addCode(this.codeDetail).then(res => {
-      //loading.dismiss();
-      // this.classInfo = res;
-    //});
-    this.codeserv.addCode(this.codeDetail);
-    loading.dismiss();
+    this.codeDetail.id = this.codeserv.generatorCode();
+
+    this.codeserv.getCode(this.codeDetail).pipe(first()).subscribe(data => {
+          if (data.length > 0) {
+            console.log(data);
+            console.log("Data already exists, so not created, recalling function again");
+            loading.dismiss();
+            this.codeGenerator();
+          }
+          else if (data.length == 0) {
+            console.log(data);
+            console.log("created");
+            this.codeserv.addCode(this.codeDetail).then(() => {
+              loading.dismiss();
+            });
+          }
+        });
     
     // this.codeserv.addCode(this.codeDetail)
-
-
-  }
-  
-  
-
+    }
 }
 
