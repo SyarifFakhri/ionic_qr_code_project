@@ -1,4 +1,4 @@
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
 import { ClassListInterface,ClassInfoService } from './../services/class-info.service';
 import { CodeInterface,CodeService } from './../services/code.service';
 import { Component, OnInit } from '@angular/core';
@@ -33,7 +33,8 @@ export class ClassDetailPage implements OnInit {
   constructor(private classService:ClassInfoService, 
     private route:ActivatedRoute, 
     private loadingController:LoadingController,
-    private codeserv: CodeService) { 
+    private codeserv: CodeService,
+    public alertController: AlertController) { 
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           console.log(user.uid);
@@ -89,8 +90,17 @@ export class ClassDetailPage implements OnInit {
           else if (data.length == 0) {
             console.log(data);
             console.log("created");
-            this.codeserv.addCode(this.codeDetail).then(() => {
+            this.codeserv.addCode(this.codeDetail).then(async () => {
               loading.dismiss();
+              
+              const alert = await this.alertController.create({
+                header: 'Class code',
+                subHeader: 'Give this to your students',
+                message: this.codeDetail.id,
+                buttons: ['OK']
+              }); 
+          
+              await alert.present();
             });
           }
         });
