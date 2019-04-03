@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
 export interface CodeInterface {
   id: string;
   lecturer: string;
-  date: number;
+  date: string;
   subject: string;
 }
 
@@ -69,9 +69,12 @@ export class CodeService {
     return this.db.collection<any>("codes", ref => ref.where('id', '==', codeDetails.id)).valueChanges();
   }
 
+
   addCode(codeDetails: CodeInterface) {
     return this.classCollection.doc(codeDetails.id).set(codeDetails);
   }
+
+
 
 }
 

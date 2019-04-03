@@ -9,7 +9,7 @@
   <ion-content padding>
     <!-- <ion-list lines="full"> -->
       <ion-item>
-        <ion-input required type="text" placeholder="class name" [(ngModel)]="classInfo.id"></ion-input>
+        <ion-input required type="text" placeholder="class name" [(ngModel)]="classInfo.id" (ngModelChange)="classInfo.id = $event.toLocaleUpperCase()"></ion-input>
       </ion-item>
       <!-- <ion-item>
         <ion-input required type="text" placeholder="class name" [(ngModel)]="classInfo.day"></ion-input>

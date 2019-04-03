@@ -17,12 +17,13 @@ export class QrcodePage implements OnInit {
   classInfo:CodeInterface = {
     id:"",
     lecturer:"",
-    date:0,
+    date:Date(),
     subject:""
   };
 
   studentInfo:studentInterface = {
     studentId: "",
+    studentName:"",
     lecturerId: "",
     classId: ""
   };
@@ -64,6 +65,7 @@ export class QrcodePage implements OnInit {
       this.studentService.getStudentDetail(this.userId).subscribe(userProfileInfo => {
         // this.studentInfo = userProfileInfo; //user profile will return the matric num only
         this.studentInfo.studentId = userProfileInfo.matricNo;
+        this.studentInfo.studentName = userProfileInfo.fullName;
         this.studentInfo.lecturerId = this.classInfo.lecturer;
         this.studentInfo.classId = this.classInfo.subject;
 

@@ -16,17 +16,20 @@ export class ClassDetailPage implements OnInit {
   classDetail: ClassListInterface = {
     id: "",
     students: [],
-    date: 0
+    date: Date()
   };
 
   codeDetail: CodeInterface = {
       lecturer:"",
       id:"",
       subject:"",
-      date:0
+      date: Date()
   };
   
   classId = null;
+ 
+
+  
 
   private userID: string = "default";
 
@@ -64,8 +67,14 @@ export class ClassDetailPage implements OnInit {
       loading.dismiss();
       this.classDetail = res;
       console.log(res);
+
+      
     });
   }
+
+  // getDate() {
+  //   return this.codeDetail.date;
+  // }
 
 
 
@@ -78,9 +87,12 @@ export class ClassDetailPage implements OnInit {
     await loading.present();
     this.codeDetail.lecturer=this.userID;
     this.codeDetail.subject=this.classId;
+    //this.codeDetail.date
     this.codeDetail.id = this.codeserv.generatorCode();
+    
 
     this.codeserv.getCode(this.codeDetail).pipe(first()).subscribe(data => {
+      
           if (data.length > 0) {
             console.log(data);
             console.log("Data already exists, so not created, recalling function again");
@@ -103,6 +115,10 @@ export class ClassDetailPage implements OnInit {
               await alert.present();
             });
           }
+
+         
+
+
         });
     
     // this.codeserv.addCode(this.codeDetail)

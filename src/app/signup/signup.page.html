@@ -35,6 +35,7 @@
         formControlName="fullName"
         type="name"
         placeholder="Your full name"
+        [ngModel]="name" (ngModelChange)="name = $event.toLocaleUpperCase()"
         [class.invalid]="!signupForm.controls['fullName'].valid && signupForm.controls['fullName'].touched"
       >
       </ion-input>

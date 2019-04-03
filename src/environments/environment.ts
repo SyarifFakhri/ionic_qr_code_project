@@ -14,12 +14,12 @@ export const environment = {
     // messagingSenderId: "167169397872"
 
     // syarif punye
-    apiKey: "AIzaSyCWqUawYopdLp8IT0CPnFfeGycIKLoDc-4",
-    authDomain: "attendanceapp-7eee4.firebaseapp.com",
-    databaseURL: "https://attendanceapp-7eee4.firebaseio.com",
-    projectId: "attendanceapp-7eee4",
-    storageBucket: "",
-    messagingSenderId: "659569133431"
+    // apiKey: "AIzaSyCWqUawYopdLp8IT0CPnFfeGycIKLoDc-4",
+    // authDomain: "attendanceapp-7eee4.firebaseapp.com",
+    // databaseURL: "https://attendanceapp-7eee4.firebaseio.com",
+    // projectId: "attendanceapp-7eee4",
+    // storageBucket: "",
+    // messagingSenderId: "659569133431"
 
     // apiKey: "AIzaSyDUEiqbBph3XV-3LmaKudvbZwWuJbe3cpk",
     // authDomain: "next-monday-97545.firebaseapp.com",
@@ -27,6 +27,14 @@ export const environment = {
     // projectId: "next-monday-97545",
     // storageBucket: "next-monday-97545.appspot.com",
     // messagingSenderId: "57589290393"
+
+    //aimi
+    apiKey: "AIzaSyALQWN9mCj45xLQ0oGBawFeiyM4c5Tbq44",
+    authDomain: "qrcode-d469a.firebaseapp.com",
+    databaseURL: "https://qrcode-d469a.firebaseio.com",
+    projectId: "qrcode-d469a",
+    storageBucket: "qrcode-d469a.appspot.com",
+    messagingSenderId: "706322031641"
   }
 };
 

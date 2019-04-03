@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 export interface ClassListInterface {
   id?: string;
   students: any;
-  date: number
+  date: string
 }
 
 @Injectable({

@@ -6,6 +6,7 @@ import { defineBase } from '@angular/core/src/render3';
 
 export interface studentInterface {
   studentId: string;
+  studentName:string;
   lecturerId: string;
   classId: string;
 }
@@ -31,7 +32,8 @@ export class AddStudentService {
   
   addStudent(studentDetails: studentInterface) {
     return this.classCollection.doc(studentDetails.lecturerId).collection<any>("class").doc(studentDetails.classId).update({
-      students: firebase.firestore.FieldValue.arrayUnion(studentDetails.studentId)
+      students: firebase.firestore.FieldValue.arrayUnion(studentDetails.studentId+'\xa0\xa0\xa0\xa0'+studentDetails.studentName)
+       //matric number
     })
   }  
 }

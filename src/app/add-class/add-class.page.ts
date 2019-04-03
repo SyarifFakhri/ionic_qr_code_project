@@ -2,6 +2,7 @@ import { ClassListInterface, ClassInfoService } from './../services/class-info.s
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
+//import { ClassDetailPage} from './../services/class-info.service';
  
 
 @Component({
@@ -15,11 +16,16 @@ export class AddClassPage implements OnInit {
   classInfo: ClassListInterface = { 
     id: 'mathematics',
     students: [],
-    date: new Date().getTime(),
+    date: Date(),
 
   };
+
+  
+
+  
   
   classId = null;
+  dateG:string = "default";
  
   constructor(private route: ActivatedRoute, private nav: NavController, private classService: ClassInfoService, private loadingController: LoadingController) { }
  
@@ -29,6 +35,8 @@ export class AddClassPage implements OnInit {
       this.loadClassInfo();
     }
   }
+
+
  
   async loadClassInfo() {
     const loading = await this.loadingController.create({
@@ -59,6 +67,7 @@ export class AddClassPage implements OnInit {
         this.nav.navigateBack('list-class');
       });
     }
+    
   }
 
 }
