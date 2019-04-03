@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import * as firebase from 'firebase';
 
 export interface ClassListInterface {
-  id?: string;
+  id?: string; //subject
   students: any;
   date: string
 }

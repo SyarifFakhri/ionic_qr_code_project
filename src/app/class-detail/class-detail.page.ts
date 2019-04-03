@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { __generator } from 'tslib';
 import * as firebase from 'firebase';
 import { first } from 'rxjs/operators';
+import { async } from 'q';
 
 @Component({
   selector: 'app-class-detail',
@@ -21,7 +22,7 @@ export class ClassDetailPage implements OnInit {
 
   codeDetail: CodeInterface = {
       lecturer:"",
-      id:"",
+      id:"", //refers to code generated
       subject:"",
       date: Date()
   };
@@ -67,8 +68,6 @@ export class ClassDetailPage implements OnInit {
       loading.dismiss();
       this.classDetail = res;
       console.log(res);
-
-      
     });
   }
 
@@ -77,8 +76,6 @@ export class ClassDetailPage implements OnInit {
   // }
 
 
-
-  
   async codeGenerator() {
     const loading = await this.loadingController.create({
       message: 'Generating code..'
@@ -89,7 +86,7 @@ export class ClassDetailPage implements OnInit {
     this.codeDetail.subject=this.classId;
     //this.codeDetail.date
     this.codeDetail.id = this.codeserv.generatorCode();
-    
+
 
     this.codeserv.getCode(this.codeDetail).pipe(first()).subscribe(data => {
       
@@ -102,23 +99,26 @@ export class ClassDetailPage implements OnInit {
           else if (data.length == 0) {
             console.log(data);
             console.log("created");
-            this.codeserv.addCode(this.codeDetail).then(async () => {
-              loading.dismiss();
+            this.codeserv.addCode(this.codeDetail).then(() => {
+              this.classDetail.id = this.codeDetail.subject;
+              this.classDetail.date = this.codeDetail.date;
+               
+              this.codeserv.createClassCodeDates(this.classDetail).then(async ()=> {
+                loading.dismiss();
+            
               
-              const alert = await this.alertController.create({
-                header: 'Class code',
-                subHeader: 'Give this to your students',
-                message: this.codeDetail.id,
-                buttons: ['OK']
+                const alert = await this.alertController.create({
+                  header: 'Class code',
+                  subHeader: 'Give this to your students',
+                  message: this.codeDetail.id,
+                  buttons: ['OK']
+              })
+              await alert.present();
               }); 
           
-              await alert.present();
+
             });
           }
-
-         
-
-
         });
     
     // this.codeserv.addCode(this.codeDetail)
