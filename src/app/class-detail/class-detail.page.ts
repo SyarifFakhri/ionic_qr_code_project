@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { __generator } from 'tslib';
 import * as firebase from 'firebase';
 import { first } from 'rxjs/operators';
+import { async } from 'q';
 
 @Component({
   selector: 'app-class-detail',
@@ -16,17 +17,20 @@ export class ClassDetailPage implements OnInit {
   classDetail: ClassListInterface = {
     id: "",
     students: [],
-    date: 0
+    date: Date()
   };
 
   codeDetail: CodeInterface = {
       lecturer:"",
-      id:"",
+      id:"", //refers to code generated
       subject:"",
-      date:0
+      date: Date()
   };
   
   classId = null;
+ 
+
+  
 
   private userID: string = "default";
 
@@ -67,9 +71,11 @@ export class ClassDetailPage implements OnInit {
     });
   }
 
+  // getDate() {
+  //   return this.codeDetail.date;
+  // }
 
 
-  
   async codeGenerator() {
     const loading = await this.loadingController.create({
       message: 'Generating code..'
@@ -78,9 +84,12 @@ export class ClassDetailPage implements OnInit {
     await loading.present();
     this.codeDetail.lecturer=this.userID;
     this.codeDetail.subject=this.classId;
+    //this.codeDetail.date
     this.codeDetail.id = this.codeserv.generatorCode();
 
+
     this.codeserv.getCode(this.codeDetail).pipe(first()).subscribe(data => {
+      
           if (data.length > 0) {
             console.log(data);
             console.log("Data already exists, so not created, recalling function again");
@@ -90,17 +99,24 @@ export class ClassDetailPage implements OnInit {
           else if (data.length == 0) {
             console.log(data);
             console.log("created");
-            this.codeserv.addCode(this.codeDetail).then(async () => {
-              loading.dismiss();
+            this.codeserv.addCode(this.codeDetail).then(() => {
+              this.classDetail.id = this.codeDetail.subject;
+              this.classDetail.date = this.codeDetail.date;
+               
+              this.codeserv.createClassCodeDates(this.classDetail).then(async ()=> {
+                loading.dismiss();
+            
               
-              const alert = await this.alertController.create({
-                header: 'Class code',
-                subHeader: 'Give this to your students',
-                message: this.codeDetail.id,
-                buttons: ['OK']
+                const alert = await this.alertController.create({
+                  header: 'Class code',
+                  subHeader: 'Give this to your students',
+                  message: this.codeDetail.id,
+                  buttons: ['OK']
+              })
+              await alert.present();
               }); 
           
-              await alert.present();
+
             });
           }
         });

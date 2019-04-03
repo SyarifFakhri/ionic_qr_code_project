@@ -6,6 +6,8 @@ import { defineBase } from '@angular/core/src/render3';
 
 export interface studentInterface {
   studentId: string;
+  studentName:string;
+  date: string;
   lecturerId: string;
   classId: string;
 }
@@ -18,20 +20,26 @@ export class AddStudentService {
   
   private classCollection: AngularFirestoreCollection<any>;
   constructor(public db: AngularFirestore) {
-    this.classCollection = db.collection('users');
+    this.classCollection = db.collection('users'); // collection in database called user
    }
   
   getClassDetail(classCode:string) {
     return this.db.collection<any>("codes").doc<any>(classCode).valueChanges();
+
   }
 
-  getStudentDetail(userId:string){
-    return this.db.collection<any>("userProfile").doc<any>(userId).valueChanges();
+  getStudentDetail(userId:string){                                                 //add another collection codes 
+    return this.db.collection<any>("userProfile").doc<any>(userId).valueChanges(); //contain student info
   }
   
   addStudent(studentDetails: studentInterface) {
-    return this.classCollection.doc(studentDetails.lecturerId).collection<any>("class").doc(studentDetails.classId).update({
-      students: firebase.firestore.FieldValue.arrayUnion(studentDetails.studentId)
+    return this.classCollection
+    .doc(studentDetails.lecturerId)
+    .collection<any>("class").doc(studentDetails.classId)
+    .collection<any>("classCodeDates")
+    .doc(studentDetails.date).update({   
+      students: firebase.firestore.FieldValue.arrayUnion(studentDetails.studentId+'\xa0\xa0\xa0\xa0'+studentDetails.studentName)
+       
     })
   }  
 }

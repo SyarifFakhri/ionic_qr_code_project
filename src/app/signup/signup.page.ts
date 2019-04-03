@@ -1,19 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-signup',
-//   templateUrl: './signup.page.html',
-//   styleUrls: ['./signup.page.scss'],
-// })
-// export class SignupPage implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
-
 import { AuthService } from 'src/app/services/user/auth.service';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -36,25 +21,6 @@ interface Profile{
 
 
 export class SignupPage implements OnInit {
-  
-
-  ///
-  // constructor(db: AngularFirestore) {
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     if (user) {
-  //       console.log(user.uid);
-  //       this.userID = user.uid;
-  //       this.classCollection = db.collection<any>('users');
-  //       this.classList = this.classCollection.doc(this.userID).collection<ClassListInterface>("class").valueChanges();    
-  //     } else {
-  //       console.log("failed to get user");
-  //       // No user is signed in.
-  //     }
-  //   });
-
-  // }
-
-  ///
 
   public signupForm: FormGroup;
   public loading: any;
