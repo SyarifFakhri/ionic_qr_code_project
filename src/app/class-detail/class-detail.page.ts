@@ -115,10 +115,12 @@ export class ClassDetailPage implements OnInit {
           else if (data.length == 0) {
             console.log(data);
             console.log("created");
-            this.codeserv.addCode(this.codeDetail).then(async () => {
-              loading.dismiss();
-              
-              const alert = await this.alertController.create({
+            this.codeserv.addCode(this.codeDetail).then(() => {
+              this.classDetail.id = this.codeDetail.subject;
+              this.classDetail.date = this.codeDetail.date;
+              this.codeserv.createClassCodeDates(this.classDetail).then(async ()=> {
+                loading.dismiss();
+                const alert = await this.alertController.create({
                 header: 'Class code',
                 subHeader: 'Give this to your students',
                 message: this.codeDetail.id,
@@ -127,14 +129,16 @@ export class ClassDetailPage implements OnInit {
           
               await alert.present();
             });
-          }
+          });
 
          
 
 
-        });
+        }
     
     // this.codeserv.addCode(this.codeDetail)
-    }
+    });
+  }
 }
+
 

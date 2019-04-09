@@ -2,6 +2,7 @@ import { CodeInterface } from './code.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import * as firebase from 'firebase';
+import { ClassListInterface } from './class-info.service';
 
 export interface CodeInterface {
   id: string;
@@ -63,6 +64,15 @@ export class CodeService {
     }
     return text;
   }
+
+  createClassCodeDates(classInfo: ClassListInterface) {
+    return this.db.collection<any>("users")
+    .doc<any>(this.userID)
+    .collection<any>("class")
+    .doc<any>(classInfo.id)
+    .collection("classCodeDates")
+    .doc(classInfo.date).set(classInfo);
+}
 
   getCode(codeDetails: CodeInterface) {
     // let isNotGenerated:boolean = true;

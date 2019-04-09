@@ -24,6 +24,7 @@ export class QrcodePage implements OnInit {
   studentInfo:studentInterface = {
     studentId: "",
     studentName:"",
+    date:"",
     lecturerId: "",
     classId: ""
   };
@@ -68,6 +69,8 @@ export class QrcodePage implements OnInit {
         this.studentInfo.studentName = userProfileInfo.fullName;
         this.studentInfo.lecturerId = this.classInfo.lecturer;
         this.studentInfo.classId = this.classInfo.subject;
+        this.studentInfo.date = this.classInfo.date;
+        console.log(this.studentInfo.date);
 
         this.studentService.addStudent(this.studentInfo).then(() => {
           loading.dismiss();
