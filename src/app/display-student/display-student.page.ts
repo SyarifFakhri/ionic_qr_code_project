@@ -9,12 +9,13 @@ import { first } from 'rxjs/operators';
 import { async } from 'q';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
+
 @Component({
-  selector: 'app-class-detail',
-  templateUrl: './class-detail.page.html',
-  styleUrls: ['./class-detail.page.scss'],
+  selector: 'app-display-student',
+  templateUrl: './display-student.page.html',
+  styleUrls: ['./display-student.page.scss'],
 })
-export class ClassDetailPage implements OnInit {
+export class DisplayStudentPage implements OnInit {
   subjects:ClassListInterface[];
   classDetail: ClassListInterface = {
     id: "",
@@ -22,17 +23,8 @@ export class ClassDetailPage implements OnInit {
     date: Date()
   };
 
-  codeDetail: CodeInterface = {
-      lecturer:"",
-      id:"",
-      subject:"",
-      date: Date()
-  };
-  
   classId = null;
   classCollection: AngularFirestoreCollection<any>;
-
-  
 
   private userID: string = "default";
 
@@ -78,63 +70,7 @@ export class ClassDetailPage implements OnInit {
       loading.dismiss();
       console.log(this.subjects);
     });
-    // this.classService.getDetail(this.classId).subscribe(res => {
-    //   loading.dismiss();
-    //   this.classDetail = res;
-    //   console.log(res);  
-    // });
+    
   }
 
-  // getDate() {
-  //   return this.codeDetail.date;
-  // }
-
-
-
-  
-  async codeGenerator() {
-    const loading = await this.loadingController.create({
-      message: 'Generating code..'
-    });
-
-    await loading.present();
-    this.codeDetail.lecturer=this.userID;
-    this.codeDetail.subject=this.classId;
-    //this.codeDetail.date
-    this.codeDetail.id = this.codeserv.generatorCode();
-    
-
-    this.codeserv.getCode(this.codeDetail).pipe(first()).subscribe(data => {
-      
-          if (data.length > 0) {
-            console.log(data);
-            console.log("Data already exists, so not created, recalling function again");
-            loading.dismiss();
-            this.codeGenerator();
-          }
-          else if (data.length == 0) {
-            console.log(data);
-            console.log("created");
-            this.codeserv.addCode(this.codeDetail).then(async () => {
-              loading.dismiss();
-              
-              const alert = await this.alertController.create({
-                header: 'Class code',
-                subHeader: 'Give this to your students',
-                message: this.codeDetail.id,
-                buttons: ['OK']
-              }); 
-          
-              await alert.present();
-            });
-          }
-
-         
-
-
-        });
-    
-    // this.codeserv.addCode(this.codeDetail)
-    }
 }
-
