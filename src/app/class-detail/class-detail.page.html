@@ -1,5 +1,7 @@
 <ion-header>
 	<ion-toolbar>
+    
+    
 		<ion-button color="dark" [routerLink]="['/list-class']">
 			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
@@ -23,7 +25,7 @@
     </ng-container>
   
     <ion-item-sliding *ngFor="let item of subjects">
-      <ion-item lines="inset" button [routerLink]="['/display-student', item.date]" detail>
+      <ion-item lines="inset" (click)="gotoStudentDetail(item)">
         <ion-label>
           {{ item.date }}
           <!-- <p>{{ item.className}}</p> -->

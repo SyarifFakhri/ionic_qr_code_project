@@ -8,6 +8,7 @@ import * as firebase from 'firebase';
 import { first } from 'rxjs/operators';
 import { async } from 'q';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { studentInterface } from '../services/add-student.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class DisplayStudentPage implements OnInit {
     date: Date()
   };
 
-  classId = null;
+  subjectId = null;
+  dateId:string;
   classCollection: AngularFirestoreCollection<any>;
 
   private userID: string = "default";
@@ -48,9 +50,13 @@ export class DisplayStudentPage implements OnInit {
     }
 
   ngOnInit() {
-    this.classId = this.route.snapshot.params['id'];
-
-    if (this.classId)  {
+    //this.classId = this.route.snapshot.params['id'];
+    this.dateId = this.route.snapshot.params['date'];
+    this.subjectId = this.route.snapshot.params['subject'];
+    console.log("date", this.dateId)
+    console.log("SUBJECT:", this.subjectId)
+    if (this.dateId && this.subjectId)  {
+      
       this.loadClassInfo();
     }
   }
@@ -60,15 +66,22 @@ export class DisplayStudentPage implements OnInit {
       message: 'Loading class info..'
     });
     await loading.present();
+  //   setTimeout(() => {
+  //     console.log("timeout")
+  //     loading.dismiss();
+  //  }, 5000);
+    // console.log("class id:", this.subjectId)
+
     this.classCollection.doc(this.userID)
     .collection<ClassListInterface>("class")
-    .doc<any>(this.classId)
-    .collection<ClassListInterface>("classCodeDates")
+    .doc<ClassListInterface>(this.subjectId)
+    .collection<any>("classCodeDates")
+    .doc<ClassListInterface>(this.dateId)
     .valueChanges().subscribe( res => {
-
-      this.subjects = res;
+      console.log(res)
+      this.classDetail = res;
       loading.dismiss();
-      console.log(this.subjects);
+      
     });
     
   }

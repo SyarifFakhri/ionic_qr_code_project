@@ -1,4 +1,4 @@
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, NavController } from '@ionic/angular';
 import { ClassListInterface,ClassInfoService } from './../services/class-info.service';
 import { CodeInterface,CodeService } from './../services/code.service';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +19,7 @@ export class ClassDetailPage implements OnInit {
   classDetail: ClassListInterface = {
     id: "",
     students: [],
-    date: Date()
+    date: Date(),
   };
 
   codeDetail: CodeInterface = {
@@ -41,7 +41,8 @@ export class ClassDetailPage implements OnInit {
     private loadingController:LoadingController,
     private db: AngularFirestore,
     private codeserv: CodeService,
-    public alertController: AlertController) { 
+    public alertController: AlertController,
+    public router: NavController) { 
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           console.log(user.uid);
@@ -64,6 +65,7 @@ export class ClassDetailPage implements OnInit {
   }
 
   async loadClassInfo() {
+
     const loading = await this.loadingController.create({
       message: 'Loading class info..'
     });
@@ -78,18 +80,14 @@ export class ClassDetailPage implements OnInit {
       loading.dismiss();
       console.log(this.subjects);
     });
-    // this.classService.getDetail(this.classId).subscribe(res => {
-    //   loading.dismiss();
-    //   this.classDetail = res;
-    //   console.log(res);  
-    // });
+    
   }
 
-  // getDate() {
-  //   return this.codeDetail.date;
-  // }
+  gotoStudentDetail(classDet:ClassListInterface) {
+    // console.log(classDet)
 
-
+    this.router.navigateForward(['/display-student', { subject: classDet.id, date:classDet.date }]);
+  }
 
   
   async codeGenerator() {

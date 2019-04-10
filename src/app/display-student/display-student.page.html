@@ -1,15 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-title></ion-title>
-    <ion-button color="dark" [routerLink]="['/class-detail']">
-			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    <!-- <ion-button color="dark" [routerLink]="['/list-class']"> -->
+      <ion-button color="dark">
+        <ion-back-button defaultHref="/list-class">
+          <!-- <ion-icon slot="icon-only" name="arrow-back"></ion-icon> -->
+        </ion-back-button>
       </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+    <ion-title>Student Attendance</ion-title>
     <ion-list>
-        <ng-container *ngIf="!subjects || subjects.length == 0">
+          <ng-container *ngIf="!classDetail.students ||classDetail.students.length == 0">
           <div *ngFor="let n of [0,1,2]" padding>
             <ion-skeleton-text></ion-skeleton-text>
             <p>
@@ -18,10 +22,11 @@
           </div>
         </ng-container>
       
-        <ion-item-sliding *ngFor="let item of subjects">
+        <ion-item-sliding *ngFor="let item of classDetail.students ">
           <ion-item lines="inset">
             <ion-label>
-              {{ item.students }}
+              {{ item}}
+              
             </ion-label>  
           </ion-item>
         </ion-item-sliding>
