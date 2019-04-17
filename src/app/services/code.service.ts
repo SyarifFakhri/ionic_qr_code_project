@@ -65,6 +65,15 @@ export class CodeService {
     return text;
   }
 
+  createClassCodeDates(classInfo: ClassListInterface) {
+    return this.db.collection<any>("users")
+    .doc<any>(this.userID)
+    .collection<any>("class")
+    .doc<any>(classInfo.id)
+    .collection("classCodeDates")
+    .doc(classInfo.date).set(classInfo);
+}
+
   getCode(codeDetails: CodeInterface) {
     // let isNotGenerated:boolean = true;
     return this.db.collection<any>("codes", ref => ref.where('id', '==', codeDetails.id)).valueChanges();

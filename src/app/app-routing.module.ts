@@ -18,7 +18,11 @@ const routes: Routes = [
   { path: 'add-class', loadChildren: './add-class/add-class.module#AddClassPageModule' },
   { path: 'add-class/:id', loadChildren: './add-class/add-class.module#AddClassPageModule'},
   { path: 'class-detail', loadChildren: './class-detail/class-detail.module#ClassDetailPageModule' },
-  { path: 'class-detail/:id', loadChildren: './class-detail/class-detail.module#ClassDetailPageModule'}
+  { path: 'class-detail/:id', loadChildren: './class-detail/class-detail.module#ClassDetailPageModule'},
+  { path: 'display-student', loadChildren: './display-student/display-student.module#DisplayStudentPageModule' },
+  // { path: 'display-student/:id', loadChildren: './display-student/display-student.module#DisplayStudentPageModule' },
+ { path: 'display-student/:subject:date', loadChildren: './display-student/display-student.module#DisplayStudentPageModule' }
+
 ];
 
 @NgModule({

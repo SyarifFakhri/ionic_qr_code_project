@@ -1,4 +1,4 @@
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, NavController } from '@ionic/angular';
 import { ClassListInterface,ClassInfoService } from './../services/class-info.service';
 import { CodeInterface,CodeService } from './../services/code.service';
 import { Component, OnInit } from '@angular/core';
@@ -7,6 +7,8 @@ import { __generator } from 'tslib';
 import * as firebase from 'firebase';
 import { first } from 'rxjs/operators';
 import { async } from 'q';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+
 
 @Component({
   selector: 'app-class-detail',
@@ -14,10 +16,11 @@ import { async } from 'q';
   styleUrls: ['./class-detail.page.scss'],
 })
 export class ClassDetailPage implements OnInit {
+  subjects:ClassListInterface[];
   classDetail: ClassListInterface = {
     id: "",
     students: [],
-    date: Date()
+    date: Date(),
   };
 
   codeDetail: CodeInterface = {
@@ -28,7 +31,7 @@ export class ClassDetailPage implements OnInit {
   };
   
   classId = null;
- 
+  classCollection: AngularFirestoreCollection<any>;
 
   
 
@@ -37,12 +40,15 @@ export class ClassDetailPage implements OnInit {
   constructor(private classService:ClassInfoService, 
     private route:ActivatedRoute, 
     private loadingController:LoadingController,
+    private db: AngularFirestore,
     private codeserv: CodeService,
-    public alertController: AlertController) { 
+    public alertController: AlertController,
+    public router: NavController) { 
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           console.log(user.uid);
           this.userID = user.uid;  
+          this.classCollection=db.collection<any>('users');
         } else {
           console.log("failed to get user");
           // No user is signed in.
@@ -60,22 +66,32 @@ export class ClassDetailPage implements OnInit {
   }
 
   async loadClassInfo() {
+
     const loading = await this.loadingController.create({
       message: 'Loading class info..'
     });
     await loading.present();
-    this.classService.getDetail(this.classId).subscribe(res => {
+
+    this.classCollection.doc(this.userID)
+    .collection<ClassListInterface>("class")
+    .doc<any>(this.classId)
+    .collection<ClassListInterface>("classCodeDates")
+    .valueChanges().subscribe( res => {
+
+      this.subjects = res;
       loading.dismiss();
-      this.classDetail = res;
-      console.log(res);
+      console.log(this.subjects);
     });
+    
   }
 
-  // getDate() {
-  //   return this.codeDetail.date;
-  // }
+  gotoStudentDetail(classDet:ClassListInterface) {
+    // console.log(classDet)
 
 
+    this.router.navigateForward(['/display-student', { subject: classDet.id, date:classDet.date }]);
+  }
+  
   async codeGenerator() {
     const loading = await this.loadingController.create({
       message: 'Generating code..'
@@ -102,26 +118,28 @@ export class ClassDetailPage implements OnInit {
             this.codeserv.addCode(this.codeDetail).then(() => {
               this.classDetail.id = this.codeDetail.subject;
               this.classDetail.date = this.codeDetail.date;
-               
+
               this.codeserv.createClassCodeDates(this.classDetail).then(async ()=> {
                 loading.dismiss();
-            
-              
                 const alert = await this.alertController.create({
-                  header: 'Class code',
-                  subHeader: 'Give this to your students',
-                  message: this.codeDetail.id,
-                  buttons: ['OK']
-              })
+                header: 'Class code',
+                subHeader: 'Give this to your students',
+                message: this.codeDetail.id,
+                buttons: ['OK']
+              });
+                
               await alert.present();
-              }); 
-          
+            }); 
+          });
 
-            });
-          }
-        });
+         
+
+
+        }
     
     // this.codeserv.addCode(this.codeDetail)
-    }
+    });
+  }
 }
+
 

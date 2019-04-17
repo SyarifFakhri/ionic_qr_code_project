@@ -20,13 +20,15 @@ export class ClassInfoService {
   private userID: string = "default";
   private classList: Observable<ClassListInterface[]>;
   
+  private currentSubject: string;
+
   constructor(db: AngularFirestore) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log(user.uid);
         this.userID = user.uid;
         this.classCollection = db.collection<any>('users');
-        this.classList = db.collection<any>('users').doc(this.userID).collection<ClassListInterface>("class").valueChanges();    
+        this.classList = db.collection<any>('users').doc(this.userID).collection<ClassListInterface>('class').doc('id').collection<ClassListInterface>('classCodeDates').valueChanges();    
       } else {
         console.log("failed to get user");
         // No user is signed in.
@@ -38,10 +40,18 @@ export class ClassInfoService {
 
   }
 
+  // getCurrentSubject() {
+  //   return this.currentSubject;
+  // }
+
+  // setCurrentSubject(sub:string) {
+  //   this.currentSubject = sub;
+  // }
+
   getDetail(id) {
     //return this.classCollection.doc<ClassListInterface>(id).valueChanges();
     console.log("get details of: " + id);
-    return this.classCollection.doc(this.userID).collection<any>("class").doc<ClassListInterface>(id).valueChanges();
+    return this.classCollection.doc(this.userID).collection<any>("class").doc<ClassListInterface>("id").collection<ClassListInterface>('classCodeDates').doc<ClassListInterface>(id).valueChanges();
   }
  
   updateDetail(classDetails: ClassListInterface) {

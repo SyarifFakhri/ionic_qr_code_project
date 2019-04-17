@@ -1,5 +1,7 @@
 <ion-header>
 	<ion-toolbar>
+    
+    
 		<ion-button color="dark" [routerLink]="['/list-class']">
 			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
@@ -13,7 +15,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ng-container *ngIf="classDetail.students.length == 0">
+    <ng-container *ngIf="!subjects || subjects.length == 0">
       <div *ngFor="let n of [0,1,2]" padding>
         <ion-skeleton-text></ion-skeleton-text>
         <p>
@@ -22,10 +24,10 @@
       </div>
     </ng-container>
   
-    <ion-item-sliding *ngFor="let student of classDetail.students">
-      <ion-item lines="inset">
+    <ion-item-sliding *ngFor="let item of subjects">
+      <ion-item lines="inset" (click)="gotoStudentDetail(item)">
         <ion-label>
-          {{ student }}
+          {{ item.date }}
           <!-- <p>{{ item.className}}</p> -->
         </ion-label>
         <!-- <ion-note slot="end" color="primary">{{ item.createdBy }}</ion-note> -->
