@@ -33,6 +33,7 @@ export class QrcodePage implements OnInit {
   
   userId:string;
   classCode:string;
+  
 
   constructor(private nav: NavController, 
     private loadingController: LoadingController,

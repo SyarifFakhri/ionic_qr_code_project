@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 import { async } from 'q';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
+
 @Component({
   selector: 'app-class-detail',
   templateUrl: './class-detail.page.html',
@@ -24,7 +25,7 @@ export class ClassDetailPage implements OnInit {
 
   codeDetail: CodeInterface = {
       lecturer:"",
-      id:"",
+      id:"", //refers to code generated
       subject:"",
       date: Date()
   };
@@ -70,6 +71,7 @@ export class ClassDetailPage implements OnInit {
       message: 'Loading class info..'
     });
     await loading.present();
+
     this.classCollection.doc(this.userID)
     .collection<ClassListInterface>("class")
     .doc<any>(this.classId)
@@ -86,9 +88,9 @@ export class ClassDetailPage implements OnInit {
   gotoStudentDetail(classDet:ClassListInterface) {
     // console.log(classDet)
 
+
     this.router.navigateForward(['/display-student', { subject: classDet.id, date:classDet.date }]);
   }
-
   
   async codeGenerator() {
     const loading = await this.loadingController.create({
@@ -100,7 +102,7 @@ export class ClassDetailPage implements OnInit {
     this.codeDetail.subject=this.classId;
     //this.codeDetail.date
     this.codeDetail.id = this.codeserv.generatorCode();
-    
+
 
     this.codeserv.getCode(this.codeDetail).pipe(first()).subscribe(data => {
       
@@ -116,6 +118,7 @@ export class ClassDetailPage implements OnInit {
             this.codeserv.addCode(this.codeDetail).then(() => {
               this.classDetail.id = this.codeDetail.subject;
               this.classDetail.date = this.codeDetail.date;
+
               this.codeserv.createClassCodeDates(this.classDetail).then(async ()=> {
                 loading.dismiss();
                 const alert = await this.alertController.create({
@@ -123,10 +126,10 @@ export class ClassDetailPage implements OnInit {
                 subHeader: 'Give this to your students',
                 message: this.codeDetail.id,
                 buttons: ['OK']
-              }); 
-          
+              });
+                
               await alert.present();
-            });
+            }); 
           });
 
          
