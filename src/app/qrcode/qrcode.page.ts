@@ -70,7 +70,10 @@ export class QrcodePage implements OnInit {
         this.studentInfo.lecturerId = this.classInfo.lecturer;
         this.studentInfo.classId = this.classInfo.subject;
         this.studentInfo.date = this.classInfo.date;
-        console.log(this.studentInfo.date);
+        console.log("Previous time: ", this.studentInfo.date);
+        let allowedTime = Date();
+        // allowedTime.setMinutes(allowedTime.getMinutes() + 30)
+        console.log("current time + 30:", allowedTime)
 
         this.studentService.addStudent(this.studentInfo).then(() => {
           loading.dismiss();
@@ -83,6 +86,29 @@ export class QrcodePage implements OnInit {
     //   this.nav.navigateBack('dashboard');
     // });
     
+  }
+
+  compareTimeWithTimeOut(prevDate:string, hour:number, minutes:number) {
+    let currentTime = Date();
+    
+
+  }
+
+  parseDateDay(dateStr:string) {
+    let splitStr = dateStr.split(' '); 
+    return splitStr[0] //return day
+  }
+
+  parseDateHour(dateStr:string) {
+    let splitStr = dateStr.split(' '); //split according to space
+    let splitTime = splitStr[4].split(':');
+    return splitTime[0] //hours
+  }
+
+  parseDateMinute(dateStr:string){
+    let splitStr = dateStr.split(' '); //split according to space
+    let splitTime = splitStr[4].split(':');
+    return splitTime[1] //minutes
   }
 
 }
