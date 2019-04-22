@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 import { ClassListInterface } from './class-info.service';
 
 export interface CodeInterface {
-  id: string;
+  id: string; //code
   lecturer: string;
   date: string;
   subject: string;
@@ -26,7 +26,7 @@ export class CodeService {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log(user.uid);
-        this.userID = user.uid;
+        this.userID = user.uid; //lectureID
         this.classCollection = db.collection<CodeInterface>('codes');    
       } else {
         console.log("failed to get user");
@@ -79,6 +79,15 @@ export class CodeService {
     return this.db.collection<any>("codes", ref => ref.where('id', '==', codeDetails.id)).valueChanges();
   }
 
+  //this.classCollection.doc(studentDetails.lecturerId).collection<any>("class").doc(studentDetails.classId).collection<any>("date")
+  createClassCodeDates(classInfo: ClassListInterface) {
+    return this.db.collection<any>("users")
+    .doc<any>(this.userID)
+    .collection<any>("class")
+    .doc<any>(classInfo.id)
+    .collection("classCodeDates")
+    .doc(classInfo.date).set(classInfo);
+  }
 
   addCode(codeDetails: CodeInterface) {
     return this.classCollection.doc(codeDetails.id).set(codeDetails);
