@@ -1,11 +1,12 @@
 <ion-header>
-	<ion-toolbar>
-		<ion-button color="dark" [routerLink]="['/dashboard']">
-			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-		  </ion-button>
-	</ion-toolbar>
-  </ion-header>
- 
+    <ion-toolbar style="--background: #1B2A2C">
+      <ion-button color="dark" [routerLink]="['/dashboard']">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+        </ion-button>
+        <h1 style= "font-weight: bold;color:white" slot="end">CLASS LIST</h1>
+    </ion-toolbar>
+    </ion-header>
+
 <ion-content>
 
 <ion-list>
@@ -19,12 +20,13 @@
   </ng-container>
 
   <ion-item-sliding *ngFor="let item of classes">
+    <ion-card style= "--background: #424242; margin: 12px; border-radius: 15px">
     <ion-item lines="inset" button [routerLink]="['/class-detail', item.id]" detail>
-      <ion-label>
+      <ion-icon size="large" slot="start" name="book"></ion-icon>
+      <ion-label color="dark" font-weight="bold">
+        <p style="color: palevioletred">Subject</p>
         {{ item.id }}
-        <!-- <p>{{ item.className}}</p> -->
       </ion-label>
-      <!-- <ion-note slot="end" color="primary">{{ item.createdBy }}</ion-note> -->
     </ion-item>
 
     <ion-item-options side="end">
@@ -33,6 +35,7 @@
         <ion-icon name="checkmark" slot="end"></ion-icon>
       </ion-item-option>
     </ion-item-options>
+  </ion-card>
   </ion-item-sliding>
 
 </ion-list>
