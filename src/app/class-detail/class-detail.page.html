@@ -1,10 +1,10 @@
 <ion-header>
-	<ion-toolbar style="--background:#1B2A2C">
+	<ion-toolbar  style="--background: linear-gradient(135deg, #EACAF7 0%, #734C92   100%)">
 		<ion-button color="dark" [routerLink]="['/list-class']">
 			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     <ion-button color="dark" (click)="codeGenerator()">
-      Generate Code
+      Generate Code {{classId}}
       </ion-button>
 
 	</ion-toolbar>
@@ -23,12 +23,12 @@
     </ng-container>
   
     <ion-item-sliding *ngFor="let item of subjects">
-        <ion-card style= "--background: #424242; margin: 12px; border-radius: 15px">
-      <ion-item lines="inset" (click)="gotoStudentDetail(item)">
+        <ion-card style=" margin: 12px; border-radius: 15px">
+      <ion-item style="--background: linear-gradient(135deg, #CAE5F7 0%, #EACAF7 100%)" lines="inset" (click)="gotoStudentDetail(item)">
           <ion-icon size="large" slot="start" name="calendar"></ion-icon>
         <ion-label>
           {{ item.date }}
-         
+          
         </ion-label>
      
       </ion-item>

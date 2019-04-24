@@ -62,6 +62,7 @@ export class ListClassPage implements OnInit {
     });
   }
 
+
 }
 
 

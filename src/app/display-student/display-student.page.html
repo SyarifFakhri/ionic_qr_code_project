@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar style="--background: #1B2A2C">
+  <ion-toolbar style="--background: linear-gradient(135deg, #EACAF7 0%, #734C92   100%)">
       <ion-button color="dark">
-        <ion-back-button defaultHref="/list-class">
+        <ion-back-button color="light" defaultHref="/list-class" >
         </ion-back-button>
       </ion-button>
-      <h4 style= "font-weight: bold;color:white" slot="end">Student Attendance</h4>
+      <h4 style= "font-family: cursive;color:white" slot="end">Student Attendance</h4>
   </ion-toolbar>
 </ion-header>
 
@@ -22,7 +22,7 @@
       
         <ion-item-sliding *ngFor="let item of classDetail.students ">
           <ion-card style= "--background: #424242; margin: 12px; border-radius: 15px">
-          <ion-item lines="inset">
+          <ion-item style="--background: linear-gradient(135deg, #CAE5F7 0%, #EACAF7 100%)" lines="inset">
               <ion-icon size="large" slot="start" name="contact"></ion-icon>
             <ion-label>
               {{ item}}
