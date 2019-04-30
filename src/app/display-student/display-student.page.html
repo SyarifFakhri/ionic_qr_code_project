@@ -1,17 +1,15 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title></ion-title>
-    <!-- <ion-button color="dark" [routerLink]="['/list-class']"> -->
+  <ion-toolbar style="--background: linear-gradient(135deg, #EACAF7 0%, #734C92   100%)">
       <ion-button color="dark">
-        <ion-back-button defaultHref="/list-class">
-          <!-- <ion-icon slot="icon-only" name="arrow-back"></ion-icon> -->
+        <ion-back-button color="light" defaultHref="/list-class" >
         </ion-back-button>
       </ion-button>
+      <h4 style= "font-family: cursive;color:white" slot="end">Student Attendance</h4>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-title>Student Attendance</ion-title>
+    <!-- <ion-title>Student Attendance</ion-title> -->
     <ion-list>
           <ng-container *ngIf="!classDetail.students ||classDetail.students.length == 0">
           <div *ngFor="let n of [0,1,2]" padding>
@@ -23,12 +21,15 @@
         </ng-container>
       
         <ion-item-sliding *ngFor="let item of classDetail.students ">
-          <ion-item lines="inset">
+          <ion-card style= "--background: #424242; margin: 12px; border-radius: 15px">
+          <ion-item style="--background: linear-gradient(135deg, #CAE5F7 0%, #EACAF7 100%)" lines="inset">
+              <ion-icon size="large" slot="start" name="contact"></ion-icon>
             <ion-label>
               {{ item}}
               
             </ion-label>  
           </ion-item>
+        </ion-card>
         </ion-item-sliding>
       
       </ion-list>

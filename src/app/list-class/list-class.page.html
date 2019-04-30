@@ -1,12 +1,13 @@
 <ion-header>
-	<ion-toolbar>
-		<ion-button color="dark" [routerLink]="['/dashboard']">
-			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-		  </ion-button>
-	</ion-toolbar>
-  </ion-header>
- 
-<ion-content>
+    <ion-toolbar style="--background: linear-gradient(135deg, #EACAF7 0%, #734C92   100%)">
+      <ion-button color="dark" [routerLink]="['/dashboard']">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+        </ion-button>
+        <h1 style= "font-weight: bold;color:white;font-family: cursive" slot="end">CLASS LIST</h1>
+    </ion-toolbar>
+    </ion-header>
+
+<ion-content style="background-color: white" >
 
 <ion-list>
   <ng-container *ngIf="!classes || classes.length == 0">
@@ -19,12 +20,13 @@
   </ng-container>
 
   <ion-item-sliding *ngFor="let item of classes">
-    <ion-item lines="inset" button [routerLink]="['/class-detail', item.id]" detail>
-      <ion-label>
+    <ion-card  class="card" style= "margin: 12px; border-radius: 15px" >
+    <ion-item style="--background: linear-gradient(135deg, #CAE5F7 0%, #EACAF7 100%)" class="item" lines="inset" button [routerLink]="['/class-detail', item.id]" detail>
+      <ion-icon size="large" slot="start" name="book"></ion-icon>
+      <ion-label color="dark" font-weight="bold">
+        <p style="color: palevioletred">Subject</p>
         {{ item.id }}
-        <!-- <p>{{ item.className}}</p> -->
       </ion-label>
-      <!-- <ion-note slot="end" color="primary">{{ item.createdBy }}</ion-note> -->
     </ion-item>
 
     <ion-item-options side="end">
@@ -33,11 +35,12 @@
         <ion-icon name="checkmark" slot="end"></ion-icon>
       </ion-item-option>
     </ion-item-options>
+  </ion-card>
   </ion-item-sliding>
 
 </ion-list>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" >
     <ion-fab-button [routerLink]="['/add-class']" routerDirection="forward" color="dark">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

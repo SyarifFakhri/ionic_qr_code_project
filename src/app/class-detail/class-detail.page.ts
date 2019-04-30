@@ -32,7 +32,6 @@ export class ClassDetailPage implements OnInit {
   
   classId = null;
   classCollection: AngularFirestoreCollection<any>;
-
   
 
   private userID: string = "default";
@@ -56,7 +55,7 @@ export class ClassDetailPage implements OnInit {
       });
   
     }
-
+    
   ngOnInit() {
     this.classId = this.route.snapshot.params['id'];
 
