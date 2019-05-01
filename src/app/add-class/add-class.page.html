@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-toolbar style="--background: #69437F">
-		<ion-button color="dark" [routerLink]="['/list-class']">
+		<ion-button color="light" [routerLink]="['/list-class']">
 			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
 		  </ion-button>
 	</ion-toolbar>
@@ -15,5 +15,5 @@
         <ion-input required type="text" placeholder="class name" [(ngModel)]="classInfo.day"></ion-input>
       </ion-item> -->
     <!-- </ion-list> -->
-    <ion-button expand="full" (click)="saveClassInfo()" color="dark">Save</ion-button>
+    <ion-button expand="full" (click)="saveClassInfo()" color="light">Save</ion-button>
   </ion-content>

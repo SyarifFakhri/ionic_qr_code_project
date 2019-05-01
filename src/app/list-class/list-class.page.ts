@@ -48,6 +48,8 @@ export class ListClassPage implements OnInit {
     this.classList.subscribe(res => {
       loading.dismiss();
       this.classes = res;
+    }, res => {
+      loading.dismiss();
     });
   }
   

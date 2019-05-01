@@ -10,7 +10,7 @@ ion-grid {
 }
 
 ion-col {
-  border: 1px solid #488aff;
+  // border: 1px solid #488aff;
   background:  transparent;
 }
 
@@ -41,6 +41,7 @@ h1 {
   .first-card {
     background: linear-gradient(135deg, #13f1fc 0%, #0470dc 100%);
     color: white !important;
+    // border-bottom: none;
   }
   .second-card {
     background: linear-gradient(135deg, #cdb5df 0%, #591a9d 100%);

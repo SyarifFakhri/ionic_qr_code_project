@@ -4,7 +4,7 @@
     <ion-col size="10">
         <!-- style="background-color: #88c3dd" -->
       <h1>Dashboard</h1>
-      <h6>Hello to-whoever-yg-tgh-login</h6>
+      <h6>Hello to {{userID}}</h6>
      </ion-col>
     <ion-col size="2" align-self-center>
       <ion-img src="../../assets/icon/logo.png" width="100px" height="auto"></ion-img>
@@ -24,11 +24,10 @@
    </ion-card-header>
  
    <ion-card-content>
-     Enter the code to enlist into the class.
-     But hurry...it has a time limit
+     Enter the code to mark your attendance in the class.
    </ion-card-content>
  </ion-card>
- </a>
+</a>
  
  <a [routerLink]="['/list-class']">
    <ion-card class="second-card">
@@ -39,7 +38,7 @@
    
      <ion-card-content>
        Setup your own class. Feel free to take control of the
-       class and be an inspirer
+       class and be an inspirer.
      </ion-card-content>
    </ion-card>
    </a>

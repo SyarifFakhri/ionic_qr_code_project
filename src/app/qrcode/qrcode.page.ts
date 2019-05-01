@@ -63,21 +63,44 @@ export class QrcodePage implements OnInit {
     console.log("inputed code is: ");
     console.log(this.classCode);
     this.studentService.getClassDetail(this.classCode).pipe(first()).subscribe(data => {
+      console.log("getting code details...")
+      if (data) {
       this.classInfo = data;
       this.studentService.getStudentDetail(this.userId).subscribe(userProfileInfo => {
-        // this.studentInfo = userProfileInfo; //user profile will return the matric num only
-        this.studentInfo.studentId = userProfileInfo.matricNo;
-        this.studentInfo.studentName = userProfileInfo.fullName;
-        this.studentInfo.lecturerId = this.classInfo.lecturer;
-        this.studentInfo.classId = this.classInfo.subject;
-        this.studentInfo.date = this.classInfo.date;
-        console.log(this.studentInfo.date);
-
-        this.studentService.addStudent(this.studentInfo).then(() => {
+        if (userProfileInfo) {
+          // console.log(userProfileInfo);
+          console.log("Getting current user details...")
+          // this.studentInfo = userProfileInfo; //user profile will return the matric num only
+          this.studentInfo.studentId = userProfileInfo.matricNo;
+          this.studentInfo.studentName = userProfileInfo.fullName;
+          this.studentInfo.lecturerId = this.classInfo.lecturer;
+          this.studentInfo.classId = this.classInfo.subject;
+          this.studentInfo.date = this.classInfo.date;
+          console.log(this.studentInfo.date);
+  
+          this.studentService.addStudent(this.studentInfo).then(() => {
+            console.log("adding student...");
+            loading.dismiss();
+            this.nav.navigateBack('dashboard');
+          });
+        }
+        else {
           loading.dismiss();
-          this.nav.navigateBack('dashboard');
-        });
+          console.log("Failed to get user profile -- incorrect code");
+        }
+    }, userProfileInfoFail => {
+      loading.dismiss();
+      console.log("Failed to get user profile -- incorrect code");
     });
+    }
+    else {
+      loading.dismiss();
+      console.log("failed to get code details -- incorrect code");
+    }
+      
+  }, data => {
+    loading.dismiss();
+    console.log("failed to get code - incorrect code");
   });
     // this.studentService.addStudent(this.studentInfo).then(() => {
     //   loading.dismiss();

@@ -66,12 +66,7 @@ export class DisplayStudentPage implements OnInit {
       message: 'Loading class info..'
     });
     await loading.present();
-  //   setTimeout(() => {
-  //     console.log("timeout")
-  //     loading.dismiss();
-  //  }, 5000);
-    // console.log("class id:", this.subjectId)
-
+    
     this.classCollection.doc(this.userID)
     .collection<ClassListInterface>("class")
     .doc<ClassListInterface>(this.subjectId)
@@ -82,6 +77,8 @@ export class DisplayStudentPage implements OnInit {
       this.classDetail = res;
       loading.dismiss();
       
+    }, res => {
+      loading.dismiss();
     });
     
   }
