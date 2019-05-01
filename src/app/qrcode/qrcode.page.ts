@@ -1,5 +1,5 @@
 import { studentInterface, AddStudentService } from './../services/add-student.service';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { CodeInterface } from '../services/code.service';
@@ -33,12 +33,15 @@ export class QrcodePage implements OnInit {
   
   userId:string;
   classCode:string;
+  codeDetail: any;
   
 
   constructor(private nav: NavController, 
     private loadingController: LoadingController,
      private studentService: AddStudentService,
-     public db:AngularFirestore) { 
+     public db:AngularFirestore,
+     public alertController:AlertController
+     ) { 
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           console.log(user.uid);
@@ -62,7 +65,7 @@ export class QrcodePage implements OnInit {
     await loading.present();
     console.log("inputed code is: ");
     console.log(this.classCode);
-    this.studentService.getClassDetail(this.classCode).pipe(first()).subscribe(data => {
+    this.studentService.getClassDetail(this.classCode).pipe(first()).subscribe(async data => {
       console.log("getting code details...")
       if (data) {
       this.classInfo = data;
@@ -87,6 +90,7 @@ export class QrcodePage implements OnInit {
         else {
           loading.dismiss();
           console.log("Failed to get user profile -- incorrect code");
+
         }
     }, userProfileInfoFail => {
       loading.dismiss();
@@ -96,6 +100,15 @@ export class QrcodePage implements OnInit {
     else {
       loading.dismiss();
       console.log("failed to get code details -- incorrect code");
+      //show alert 
+      const alert = await this.alertController.create({
+        header: 'Error',
+        subHeader: 'Incorrect code. Please reenter the code',
+        message: this.classCode,
+        buttons: ['OK']
+      });
+        
+      await alert.present();
     }
       
   }, data => {
