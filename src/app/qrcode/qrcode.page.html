@@ -1,9 +1,11 @@
 <ion-header>
 	<ion-toolbar style="--background: linear-gradient(135deg, #AFD6F2    0%, #5E45C1   100%)">
-		<ion-button color="dark" [routerLink]="['/dashboard']">
+		<ion-button color="light" [routerLink]="['/dashboard']">
 			<ion-icon slot="start" name="arrow-back"></ion-icon>
 		  </ion-button>
-		  <h1 style= "font-weight: bold;color:white;font-family: cursive" slot="end">QR CODE</h1>
+		  <ion-title slot="end" style= "font-weight: bold;color:white;font-family: cursive">
+			QR CODE
+		  </ion-title>
 	</ion-toolbar>
   </ion-header>
   
@@ -44,7 +46,7 @@
 			</div>
 
 			<div padding>
-				<ion-button (click)="addStudent()" color="dark" size="large" expand="block">Submit</ion-button>
+				<ion-button (click)="addStudent()" color="tertiary" size="large" expand="block">Submit</ion-button>
 			</div>
 		  
 		 </ion-card>

@@ -104,7 +104,6 @@ export class ClassDetailPage implements OnInit {
 
 
     this.codeserv.getCode(this.codeDetail).pipe(first()).subscribe(data => {
-      
           if (data.length > 0) {
             console.log(data);
             console.log("Data already exists, so not created, recalling function again");
@@ -118,7 +117,7 @@ export class ClassDetailPage implements OnInit {
               this.classDetail.id = this.codeDetail.subject;
               this.classDetail.date = this.codeDetail.date;
 
-              this.codeserv.createClassCodeDates(this.classDetail).then(async ()=> {
+              this.codeserv.createClassCodeDates(this.classDetail).then(async data => {
                 loading.dismiss();
                 const alert = await this.alertController.create({
                 header: 'Class code',
@@ -126,7 +125,6 @@ export class ClassDetailPage implements OnInit {
                 message: this.codeDetail.id,
                 buttons: ['OK']
               });
-                
               await alert.present();
             }); 
           });

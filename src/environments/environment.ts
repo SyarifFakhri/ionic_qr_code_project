@@ -14,12 +14,12 @@ export const environment = {
     // messagingSenderId: "167169397872"
 
     // syarif punye
-    // apiKey: "AIzaSyCWqUawYopdLp8IT0CPnFfeGycIKLoDc-4",
-    // authDomain: "attendanceapp-7eee4.firebaseapp.com",
-    // databaseURL: "https://attendanceapp-7eee4.firebaseio.com",
-    // projectId: "attendanceapp-7eee4",
-    // storageBucket: "",
-    // messagingSenderId: "659569133431"
+    apiKey: "AIzaSyCWqUawYopdLp8IT0CPnFfeGycIKLoDc-4",
+    authDomain: "attendanceapp-7eee4.firebaseapp.com",
+    databaseURL: "https://attendanceapp-7eee4.firebaseio.com",
+    projectId: "attendanceapp-7eee4",
+    storageBucket: "",
+    messagingSenderId: "659569133431"
 
     // apiKey: "AIzaSyDUEiqbBph3XV-3LmaKudvbZwWuJbe3cpk",
     // authDomain: "next-monday-97545.firebaseapp.com",
@@ -37,12 +37,12 @@ export const environment = {
     // messagingSenderId: "706322031641"
 
     
-    apiKey: "AIzaSyB70b4ZDIyH3Q0Xo__c8kvl2Y7JSuIYoOA",
-    authDomain: "login-process-1.firebaseapp.com",
-    databaseURL: "https://login-process-1.firebaseio.com",
-    projectId: "login-process-1",
-    storageBucket: "login-process-1.appspot.com",
-    messagingSenderId: "319126055148"
+    // apiKey: "AIzaSyB70b4ZDIyH3Q0Xo__c8kvl2Y7JSuIYoOA",
+    // authDomain: "login-process-1.firebaseapp.com",
+    // databaseURL: "https://login-process-1.firebaseio.com",
+    // projectId: "login-process-1",
+    // storageBucket: "login-process-1.appspot.com",
+    // messagingSenderId: "319126055148"
   }
 };
 

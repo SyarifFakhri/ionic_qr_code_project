@@ -1,10 +1,11 @@
 <ion-header>
   <ion-toolbar style="--background: linear-gradient(135deg, #EACAF7 0%, #734C92   100%)">
-      <ion-button color="dark">
-        <ion-back-button color="light" defaultHref="/list-class" >
-        </ion-back-button>
-      </ion-button>
-      <h4 style= "font-family: cursive;color:white" slot="end">Student Attendance</h4>
+          <ion-button color="light" [routerLink]="['/list-class']">
+            <ion-icon slot="start" name="arrow-back"></ion-icon>
+          </ion-button>
+      <ion-title slot="end" style= "font-weight: bold;color:white;font-family: cursive">
+        Student Attendance
+      </ion-title>
   </ion-toolbar>
 </ion-header>
 

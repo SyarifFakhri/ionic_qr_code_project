@@ -56,9 +56,10 @@ export class CodeService {
 
   generatorCode() {
     let text = '';
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let possible = "0123456789";
+    // let possible = "01";
     // let possible = "AB";
-    for(let i=0;i<7;i++)
+    for(let i=0;i<10;i++)
     {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
