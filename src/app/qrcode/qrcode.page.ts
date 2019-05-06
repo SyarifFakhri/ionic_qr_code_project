@@ -129,7 +129,13 @@ export class QrcodePage implements OnInit {
 
   compareTimeWithTimeOut(prevDate:string, hour:number, minutes:number) {
     let currentTime = Date();
-    
+    let currentDay = this.parseDateDay(currentTime);
+    let currentHour = this.parseDateHour(currentTime);
+    let currentMinute = this.parseDateMinute(currentTime);
+
+    console.log(currentDay);
+    console.log(currentHour);
+    console.log(currentMinute);
 
   }
 
