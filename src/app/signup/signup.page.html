@@ -7,8 +7,11 @@
 <ion-content padding>
 
 </ion-content> -->
-<ion-content padding>
-  <form [formGroup]="signupForm">
+
+<ion-content padding style="--background: linear-gradient(135deg, #CAE5F7 0%, #EACAF7 100%)">
+  
+  <form [formGroup]="signupForm" >
+      <ion-card style="margin-top:120px">
     <ion-item>
       <ion-label position="stacked">Email</ion-label>
       <ion-input
@@ -88,9 +91,10 @@
       <ion-label>Your matric number needs more than 6 numbers.</ion-label>
     </ion-item>
 
-
+  </ion-card>
 
     <ion-button
+    style="--background: linear-gradient(135deg, #13f1fc 0%, #591a9d 100%)"
     expand="block"
     (click)="signupUser(signupForm)"
     [disabled]="!signupForm.valid" routerLink="/login"
@@ -103,4 +107,5 @@
 
 
   </form>
+
 </ion-content>

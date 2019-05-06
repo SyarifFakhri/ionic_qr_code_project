@@ -1,18 +1,21 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Attendance App
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content padding>
-  Welcome
-  <br>
+    
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col align-self-center class="ion-text-center">
+          <!-- <ion-img src="../../assets/icon/logo.png" width="200px" height="auto"></ion-img> -->
+          <br />
+            <!-- <p style="color:white">Towards A Better Class Experience</p> -->
+            <ion-button style="--background: linear-gradient(135deg, #EACAF7 0%, #734C92   100%); margin-top:250px"  [routerLink]="['/login']">
+              Continue
+            </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+    
+    
+    
 
-  <ion-button [routerLink]="['/login']">
-    To login page
-  </ion-button>
-</ion-content>
 
 

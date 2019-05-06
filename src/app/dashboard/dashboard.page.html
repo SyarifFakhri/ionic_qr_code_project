@@ -1,18 +1,50 @@
-
 <ion-grid>
-<ion-row justify-content-center>
-  <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-    <div text-center>
-      <h4>Dashboard</h4>
-    </div>
-    
-
-    <div padding>
-      <ion-button color="dark" size="large" [routerLink]="['/qrcode']" expand="block">Scan</ion-button>
-    </div>
-    <div padding>
-      <ion-button color="dark" size="large" [routerLink]="['/list-class']" expand="block">Setup Class</ion-button>
-    </div>
-  </ion-col>
-</ion-row>
-</ion-grid>
+  <ion-row> 
+    <!-- style="background-color: #88c3dd; margin: 12px; border-radius: 15px" -->
+    <ion-col size="10">
+        <!-- style="background-color: #88c3dd" -->
+      <h1>Dashboard</h1>
+      <h6>Hello to {{userID}}</h6>
+     </ion-col>
+    <ion-col size="2" align-self-center>
+      <ion-img src="../../assets/icon/logo.png" width="100px" height="auto"></ion-img>
+    </ion-col>
+  </ion-row>
+ 
+  
+ <ion-row justify-content-center>
+   <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+ 
+ 
+ <a [routerLink]="['/qrcode']">
+ <ion-card class="first-card">
+   <ion-card-header>
+     <ion-card-subtitle>Start scanning</ion-card-subtitle>
+     <ion-card-title>SCAN</ion-card-title>
+   </ion-card-header>
+ 
+   <ion-card-content>
+     Enter the code to mark your attendance in the class.
+   </ion-card-content>
+ </ion-card>
+</a>
+ 
+ <a [routerLink]="['/list-class']">
+   <ion-card class="second-card">
+     <ion-card-header class="pull-right">
+       <ion-card-subtitle>Setup a class</ion-card-subtitle>
+       <ion-card-title>SETUP CLASS</ion-card-title>
+     </ion-card-header>
+   
+     <ion-card-content>
+       Setup your own class. Feel free to take control of the
+       class and be an inspirer.
+     </ion-card-content>
+   </ion-card>
+   </a>
+ 
+ 
+ </ion-col>
+ </ion-row>
+ </ion-grid>
+ 

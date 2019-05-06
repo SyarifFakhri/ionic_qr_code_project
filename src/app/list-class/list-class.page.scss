@@ -3,12 +3,11 @@ app-login {
 }
 
 $white-color: #fff;
-$height100: 100%;
+$height100: 10%;
 
 ion-grid {
-    width:100%;
+    width:10%;
     height: $height100;
-    background: #dfdfdf;
 }
 
 ion-row {
@@ -17,7 +16,6 @@ ion-row {
 
 ion-col {
     border: 1px solid #488aff;
-    background: $white-color;
 }
 
 ion-button {
@@ -25,9 +23,30 @@ ion-button {
     
 }
 
+  ion-item { 
+    // .list {
+    //     --ion-background-color:rgb(205, 177, 214);
+    // }
+  }
+// ion-content{
+//     --ion-background-color:wheat;
+//     // .list {
+//     //     --ion-background-color:white;
+//     // }
+    
+// }
+
+// .card {
+//     background:wheat;
+//    }
+// .item {
+//     background: rgb(205, 177, 214);
+// }
+
+
 @media (min-width: 240px) and (max-width: 768px) {
     ion-grid {
-        background: $white-color;
+        background: #303030;
     }
     ion-col {
         border: none;

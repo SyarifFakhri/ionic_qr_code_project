@@ -14,7 +14,7 @@ import { NavController, LoadingController } from '@ionic/angular';
 export class AddClassPage implements OnInit {
 
   classInfo: ClassListInterface = { 
-    id: 'mathematics',
+    id: '',
     students: [],
     date: Date(),
 
