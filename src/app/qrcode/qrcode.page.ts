@@ -85,7 +85,8 @@ export class QrcodePage implements OnInit {
           let allowedTime = Date();
           // allowedTime.setMinutes(allowedTime.getMinutes() + 30)
           console.log("current time + 30:", allowedTime)
-  
+          this.compareTimeWithTimeOut(this.studentInfo.date, 0, 5);
+
           this.studentService.addStudent(this.studentInfo).then(() => {
             console.log("adding student...");
             loading.dismiss();
@@ -127,7 +128,7 @@ export class QrcodePage implements OnInit {
     
   }
 
-  compareTimeWithTimeOut(prevDate:string, hour:number, minutes:number) {
+  compareTimeWithTimeOut(prevDate:string, hour:number, minutes:number) { //hours and minutes is timeout time
     let currentTime = Date();
     let currentDay = this.parseDateDay(currentTime);
     let currentHour = this.parseDateHour(currentTime);
@@ -136,7 +137,6 @@ export class QrcodePage implements OnInit {
     console.log(currentDay);
     console.log(currentHour);
     console.log(currentMinute);
-
   }
 
   parseDateDay(dateStr:string) {

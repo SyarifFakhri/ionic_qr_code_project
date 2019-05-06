@@ -16,11 +16,13 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
   styleUrls: ['./class-detail.page.scss'],
 })
 export class ClassDetailPage implements OnInit {
+
   subjects:ClassListInterface[];
   classDetail: ClassListInterface = {
     id: "",
     students: [],
     date: Date(),
+    currentTimeMs: 0,
   };
 
   codeDetail: CodeInterface = {
@@ -115,7 +117,13 @@ export class ClassDetailPage implements OnInit {
             console.log("created");
             this.codeserv.addCode(this.codeDetail).then(() => {
               this.classDetail.id = this.codeDetail.subject;
-              this.classDetail.date = this.codeDetail.date;
+              // this.classDetail.date = this.codeDetail.date;
+              this.classDetail.currentTimeMs = Date.now(); //time since 1970 utc in ms
+              let dateObj = new Date(this.classDetail.currentTimeMs);
+              this.classDetail.date = dateObj.toUTCString();
+              
+              console.log("current time is: " + this.classDetail.currentTimeMs);
+              console.log("current date is: " + this.classDetail.date);
 
               this.codeserv.createClassCodeDates(this.classDetail).then(async data => {
                 loading.dismiss();
