@@ -18,7 +18,8 @@ export class QrcodePage implements OnInit {
     id:"",
     lecturer:"",
     date:Date(),
-    subject:""
+    subject:"",
+    currentTimeMs: 0,
   };
 
   studentInfo:studentInterface = {
@@ -69,7 +70,7 @@ export class QrcodePage implements OnInit {
       console.log("getting code details...")
       if (data) {
       this.classInfo = data;
-      this.studentService.getStudentDetail(this.userId).subscribe(userProfileInfo => {
+      this.studentService.getStudentDetail(this.userId).subscribe(async userProfileInfo => {
         if (userProfileInfo) {
           // console.log(userProfileInfo);
           console.log("Getting current user details...")
@@ -81,17 +82,28 @@ export class QrcodePage implements OnInit {
           this.studentInfo.date = this.classInfo.date;
           console.log(this.studentInfo.date);
 
-          console.log("Previous time: ", this.studentInfo.date);
-          let allowedTime = Date();
-          // allowedTime.setMinutes(allowedTime.getMinutes() + 30)
-          console.log("current time + 30:", allowedTime)
-          this.compareTimeWithTimeOut(this.studentInfo.date, 0, 5);
+          let allowed = this.compareTimeWithTimeOut(this.classInfo.currentTimeMs, 0, 5, 0);
 
-          this.studentService.addStudent(this.studentInfo).then(() => {
-            console.log("adding student...");
+          if (allowed) {
+            this.studentService.addStudent(this.studentInfo).then(() => {
+              console.log("adding student...");
+              loading.dismiss();
+              this.nav.navigateBack('dashboard');
+            }); 
+          }
+          else {
+            //show pop up saying it's past the timeout already  
+            console.log("timeout!")
             loading.dismiss();
-            this.nav.navigateBack('dashboard');
-          });
+            const alert = await this.alertController.create({
+              header: 'Timed Out.',
+              subHeader: 'You have timed out. You cannot enter this class anymore',
+              message: this.classCode,
+              buttons: ['OK']
+            });
+              
+            await alert.present();
+          }
         }
         else {
           loading.dismiss();
@@ -121,39 +133,25 @@ export class QrcodePage implements OnInit {
     loading.dismiss();
     console.log("failed to get code - incorrect code");
   });
-    // this.studentService.addStudent(this.studentInfo).then(() => {
-    //   loading.dismiss();
-    //   this.nav.navigateBack('dashboard');
-    // });
-    
   }
 
-  compareTimeWithTimeOut(prevDate:string, hour:number, minutes:number) { //hours and minutes is timeout time
-    let currentTime = Date();
-    let currentDay = this.parseDateDay(currentTime);
-    let currentHour = this.parseDateHour(currentTime);
-    let currentMinute = this.parseDateMinute(currentTime);
-
-    console.log(currentDay);
-    console.log(currentHour);
-    console.log(currentMinute);
-  }
-
-  parseDateDay(dateStr:string) {
-    let splitStr = dateStr.split(' '); 
-    return splitStr[0] //return day
-  }
-
-  parseDateHour(dateStr:string) {
-    let splitStr = dateStr.split(' '); //split according to space
-    let splitTime = splitStr[4].split(':');
-    return splitTime[0] //hours
-  }
-
-  parseDateMinute(dateStr:string){
-    let splitStr = dateStr.split(' '); //split according to space
-    let splitTime = splitStr[4].split(':');
-    return splitTime[1] //minutes
+  compareTimeWithTimeOut(prevDateInMs:number, hour:number, minutes:number, seconds:number) { //hours and minutes is timeout time
+    let secondInMs:number = seconds * 1000;
+    let minuteInMs:number = minutes * 60 * 1000;
+    let hourInMs:number = hour * 60 * 60 * 1000;
+    let currentTime:number = Date.now();
+    let allowedTime: number = prevDateInMs + hourInMs + minuteInMs + secondInMs
+    let timeDiff:number = allowedTime - currentTime;
+    console.log("current time:" + currentTime);
+    console.log("allowed time: " + allowedTime);
+    console.log("time diff: " + timeDiff);
+    if (timeDiff  > 0)
+    {
+      return true;
+    } 
+    else {
+      return false;
+    }
   }
 
 }
