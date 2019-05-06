@@ -21,7 +21,7 @@ export class ClassDetailPage implements OnInit {
   classDetail: ClassListInterface = {
     id: "",
     students: [],
-    date: Date(),
+    date: "empty",
     currentTimeMs: 0,
   };
 
@@ -29,7 +29,8 @@ export class ClassDetailPage implements OnInit {
       lecturer:"",
       id:"", //refers to code generated
       subject:"",
-      date: Date()
+      date: "empty",
+      currentTimeMs: 0,
   };
   
   classId = null;
@@ -101,9 +102,10 @@ export class ClassDetailPage implements OnInit {
     await loading.present();
     this.codeDetail.lecturer=this.userID;
     this.codeDetail.subject=this.classId;
-    //this.codeDetail.date
     this.codeDetail.id = this.codeserv.generatorCode();
-
+    this.codeDetail.currentTimeMs = Date.now();
+    let dateObj = new Date(this.codeDetail.currentTimeMs);
+    this.codeDetail.date = dateObj.toUTCString();
 
     this.codeserv.getCode(this.codeDetail).pipe(first()).subscribe(data => {
           if (data.length > 0) {
@@ -118,9 +120,9 @@ export class ClassDetailPage implements OnInit {
             this.codeserv.addCode(this.codeDetail).then(() => {
               this.classDetail.id = this.codeDetail.subject;
               // this.classDetail.date = this.codeDetail.date;
-              this.classDetail.currentTimeMs = Date.now(); //time since 1970 utc in ms
-              let dateObj = new Date(this.classDetail.currentTimeMs);
-              this.classDetail.date = dateObj.toUTCString();
+              this.classDetail.currentTimeMs = this.codeDetail.currentTimeMs; //time since 1970 utc in ms
+              // let dateObj = new Date(this.classDetail.currentTimeMs);
+              this.classDetail.date = this.codeDetail.date;
               
               console.log("current time is: " + this.classDetail.currentTimeMs);
               console.log("current date is: " + this.classDetail.date);
@@ -136,10 +138,6 @@ export class ClassDetailPage implements OnInit {
               await alert.present();
             }); 
           });
-
-         
-
-
         }
     
     // this.codeserv.addCode(this.codeDetail)
