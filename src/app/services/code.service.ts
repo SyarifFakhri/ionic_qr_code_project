@@ -9,6 +9,7 @@ export interface CodeInterface {
   lecturer: string;
   date: string;
   subject: string;
+  currentTimeMs: number;
 }
 
 

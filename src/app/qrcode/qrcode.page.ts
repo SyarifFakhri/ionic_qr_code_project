@@ -18,7 +18,8 @@ export class QrcodePage implements OnInit {
     id:"",
     lecturer:"",
     date:Date(),
-    subject:""
+    subject:"",
+    currentTimeMs: 0,
   };
 
   studentInfo:studentInterface = {
@@ -69,7 +70,7 @@ export class QrcodePage implements OnInit {
       console.log("getting code details...")
       if (data) {
       this.classInfo = data;
-      this.studentService.getStudentDetail(this.userId).subscribe(userProfileInfo => {
+      this.studentService.getStudentDetail(this.userId).subscribe(async userProfileInfo => {
         if (userProfileInfo) {
           // console.log(userProfileInfo);
           console.log("Getting current user details...")
@@ -80,12 +81,29 @@ export class QrcodePage implements OnInit {
           this.studentInfo.classId = this.classInfo.subject;
           this.studentInfo.date = this.classInfo.date;
           console.log(this.studentInfo.date);
-  
-          this.studentService.addStudent(this.studentInfo).then(() => {
-            console.log("adding student...");
+
+          let allowed = this.compareTimeWithTimeOut(this.classInfo.currentTimeMs, 0, 5, 0);
+
+          if (allowed) {
+            this.studentService.addStudent(this.studentInfo).then(() => {
+              console.log("adding student...");
+              loading.dismiss();
+              this.nav.navigateBack('dashboard');
+            }); 
+          }
+          else {
+            //show pop up saying it's past the timeout already  
+            console.log("timeout!")
             loading.dismiss();
-            this.nav.navigateBack('dashboard');
-          });
+            const alert = await this.alertController.create({
+              header: 'Timed Out.',
+              subHeader: 'You have timed out. You cannot enter this class anymore',
+              message: this.classCode,
+              buttons: ['OK']
+            });
+              
+            await alert.present();
+          }
         }
         else {
           loading.dismiss();
@@ -115,11 +133,25 @@ export class QrcodePage implements OnInit {
     loading.dismiss();
     console.log("failed to get code - incorrect code");
   });
-    // this.studentService.addStudent(this.studentInfo).then(() => {
-    //   loading.dismiss();
-    //   this.nav.navigateBack('dashboard');
-    // });
-    
+  }
+
+  compareTimeWithTimeOut(prevDateInMs:number, hour:number, minutes:number, seconds:number) { //hours and minutes is timeout time
+    let secondInMs:number = seconds * 1000;
+    let minuteInMs:number = minutes * 60 * 1000;
+    let hourInMs:number = hour * 60 * 60 * 1000;
+    let currentTime:number = Date.now();
+    let allowedTime: number = prevDateInMs + hourInMs + minuteInMs + secondInMs
+    let timeDiff:number = allowedTime - currentTime;
+    console.log("current time:" + currentTime);
+    console.log("allowed time: " + allowedTime);
+    console.log("time diff: " + timeDiff);
+    if (timeDiff  > 0)
+    {
+      return true;
+    } 
+    else {
+      return false;
+    }
   }
 
 }
