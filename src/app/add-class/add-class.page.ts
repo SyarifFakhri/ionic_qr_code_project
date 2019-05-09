@@ -17,7 +17,7 @@ export class AddClassPage implements OnInit {
     id: '',
     students: [],
     date: Date(),
-
+    currentTimeMs:0
   };
 
   

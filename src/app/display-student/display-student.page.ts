@@ -21,7 +21,8 @@ export class DisplayStudentPage implements OnInit {
   classDetail: ClassListInterface = {
     id: "",
     students: [],
-    date: Date()
+    date: Date(),
+    currentTimeMs:0
   };
 
   subjectId = null;
